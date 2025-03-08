@@ -36,56 +36,56 @@
                         </div>
                     </div>
                     
-                    <div class="layui-form-item">
+                    <div class="layui-form-item" style="display:none;">
                         <label class="layui-form-label">过期时间</label>
                         <div class="layui-input-block">
                             <input type="text" name="ExpiredTime" id="ExpiredTime" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     
-                    <div class="layui-form-item">
+                    <div class="layui-form-item" style="display:none;">
                         <label class="layui-form-label">绑定code</label>
                         <div class="layui-input-block">
                             <input type="text" name="Code" value="" class="layui-input">
                         </div>
                     </div>
                     
-                    <div class="layui-form-item">
+                    <div class="layui-form-item" style="display:none;">
                         <label class="layui-form-label required">是否有效</label>
                         <div class="layui-input-block">
                             <input type="number" name="IsValid" value="" required lay-verify="required" class="layui-input">
                         </div>
                     </div>
                     
-                    <div class="layui-form-item">
+                    <div class="layui-form-item" style="display:none;">
                         <label class="layui-form-label">TenantCode</label>
                         <div class="layui-input-block">
                             <input type="text" name="TenantCode" value="" class="layui-input">
                         </div>
                     </div>
                     
-                    <div class="layui-form-item">
+                    <div class="layui-form-item" style="display:none;">
                         <label class="layui-form-label">CreateTime</label>
                         <div class="layui-input-block">
                             <input type="text" name="CreateTime" id="CreateTime" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     
-                    <div class="layui-form-item">
+                    <div class="layui-form-item" style="display:none;">
                         <label class="layui-form-label">CreateBy</label>
                         <div class="layui-input-block">
                             <input type="text" name="CreateBy" value="" class="layui-input">
                         </div>
                     </div>
                     
-                    <div class="layui-form-item">
+                    <div class="layui-form-item" style="display:none;">
                         <label class="layui-form-label">UpdateTime</label>
                         <div class="layui-input-block">
                             <input type="text" name="UpdateTime" id="UpdateTime" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     
-                    <div class="layui-form-item">
+                    <div class="layui-form-item" style="display:none;">
                         <label class="layui-form-label">UpdateBy</label>
                         <div class="layui-input-block">
                             <input type="text" name="UpdateBy" value="" class="layui-input">
@@ -191,6 +191,7 @@
                 });
                 layui.form.on("submit(save)", function (data) {
                     data.field[PRIMARY_KEY] = layui.url().search[PRIMARY_KEY];
+
                     layui.$.ajax({
                         url: UPDATE_API,
                         type: "POST",

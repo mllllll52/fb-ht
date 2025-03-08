@@ -7,39 +7,12 @@ use support\Response;
 use plugin\admin\app\model\Userparam;
 use plugin\admin\app\controller\Crud;
 use support\exception\BusinessException;
-use plugin\admin\app\model\userTaskConfig;
 
 /**
  * 任务 
  */
 class UserparamController extends Crud
 {
-    protected $noNeedLogin = ['getTaskStatue'];
-
-    // 获取任务状态
-    public function getTaskStatue()
-    {
-        // 获取 Text 和 id 列
-        $tasks = userTaskConfig::pluck('Text', 'id');
-
-        // 转换数据格式（对象结构）
-        $formattedTasks = $tasks->mapWithKeys(function ($text, $id) {
-            return [
-                $id => [
-                    'Selected'  => false,
-                    'Disabled'  => false,
-                    'ParentId'  => '',
-                    'Text'      => $text,
-                    'Value'     => $id,
-                ]
-            ];
-        });
-
-        // 返回 JSON 格式的对象
-        return json($formattedTasks);
-    }
-
-
     /**
      * @var Userparam
      */
