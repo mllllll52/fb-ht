@@ -15,17 +15,18 @@
 use plugin\admin\app\controller\AccountController;
 use plugin\admin\app\controller\AccountMsgListController;
 use plugin\admin\app\controller\VmtaskController;
-use plugin\admin\app\controller\UserparamController;
+use plugin\admin\app\controller\fbController;
 
 use plugin\admin\app\controller\DictController;
 use Webman\Route;
 use support\Request;
 
 
+Route::any('/app/admin/fbApi/getTaskList', [fbController::class, 'getTaskList']);
 
-Route::any('/app/admin/userParam/getTaskStatue', [UserparamController::class, 'getTaskStatue']);
+Route::any('/app/admin/fbApi/getTaskStatue', [fbController::class, 'getTaskStatue']);
 
-Route::any('/app/admin/vmTask/getVmTaskName', [VmtaskController::class, 'getVmTaskName']);
+Route::any('/app/admin/fbApi/getVmTaskName', [fbController::class, 'getVmTaskName']);
 
 Route::any('/app/admin/account/loginPost', [AccountController::class, 'loginPost']);
 

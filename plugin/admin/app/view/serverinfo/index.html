@@ -66,10 +66,13 @@
 					},{
 						title: "ID",align: "center",
 						field: "ID",
-					},{
-						title: "当前可运行最大数量",align: "center",
-						field: "RunMaxLimit",
-					},{
+
+                    },{
+                        title: "当前可运行最大数量",
+                        align: "center",
+                        field: "RunMaxLimit",
+                        width: 300
+                    },{
 						title: "服务器描述",align: "center",
 						field: "Desc",
 					},{
@@ -83,22 +86,22 @@
 						field: "Code",
 					},{
 						title: "是否有效",align: "center",
-						field: "IsValid",
-					},{
+						field: "IsValid",hide: true,
+                    },{
 						title: "TenantCode",align: "center",
-						field: "TenantCode",
+						field: "TenantCode",hide: true,
 					},{
 						title: "CreateTime",align: "center",
-						field: "CreateTime",
+						field: "CreateTime",hide: true,
 					},{
 						title: "CreateBy",align: "center",
-						field: "CreateBy",
+						field: "CreateBy",hide: true,
 					},{
 						title: "UpdateTime",align: "center",
-						field: "UpdateTime",
+						field: "UpdateTime",hide: true,
 					},{
 						title: "UpdateBy",align: "center",
-						field: "UpdateBy",
+						field: "UpdateBy",hide: true,
 					},{
 						title: "操作",
 						toolbar: "#table-bar",
@@ -107,7 +110,7 @@
 						width: 120,
 					}
 				];
-				
+
 				// 渲染表格
 				table.render({
 				    elem: "#data-table",
@@ -127,8 +130,7 @@
 				        layer.photos({photos: 'div[lay-id="data-table"]', anim: 5});
 				    }
 				});
-				
-				
+
                 // 编辑或删除行事件
                 table.on("tool(data-table)", function(obj) {
                     if (obj.event === "remove") {
@@ -206,7 +208,7 @@
                     let value = obj.data[PRIMARY_KEY];
                     layer.open({
                         type: 2,
-                        title: "修改",
+                        title: "编辑",
                         shade: 0.1,
                         maxmin: true,
                         area: [common.isModile()?"100%":"500px", common.isModile()?"100%":"450px"],
@@ -216,7 +218,7 @@
 
                 // 删除一行
                 let remove = function(obj) {
-                    return doRemove(obj.data[PRIMARY_KEY]);
+                    return updateInvalidStatus(obj.data[PRIMARY_KEY]);
                 }
 
                 // 删除多行
@@ -226,8 +228,46 @@
                         layui.popup.warning("未选中数据");
                         return false;
                     }
-                    doRemove(checkIds.split(","));
+                    updateInvalidStatus(checkIds.split(","));
                 }
+
+
+
+                let updateInvalidStatus = function(ids) {
+
+                    let data = {};
+                    data.field[PRIMARY_KEY] = layui.url().search[PRIMARY_KEY];
+
+                    console.log(data);
+                    console.log("发送的请求数据：", data); // 打印请求数据，确保 isValid 为 0
+
+                    layer.confirm("确定设置为无效?", {
+                        icon: 3,
+                        title: "提示"
+                    }, function(index) {
+                        layer.close(index);
+                        let loading = layer.load();
+                        $.ajax({
+                            url: UPDATE_API, // 你可以替换成相应的更新 API
+                            data: data,
+                            dataType: "json",
+                            type: "post", // 使用 POST 请求来执行更新
+                            success: function(res) {
+                                layer.close(loading);
+                                console.log("返回结果：", res); // 打印返回结果
+
+                                if (res.code) {
+                                    return layui.popup.failure(res.msg);
+                                }
+                                return layui.popup.success("操作成功", refreshTable);
+                            },
+                            error: function(xhr, status, error) {
+                                console.log("请求错误：", error); // 打印请求错误信息
+                            }
+                        })
+                    });
+                }
+
 
                 // 执行删除
                 let doRemove = function (ids) {
