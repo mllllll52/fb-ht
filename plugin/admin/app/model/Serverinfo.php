@@ -3,7 +3,6 @@
 namespace plugin\admin\app\model;
 
 use plugin\admin\app\model\Base;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property integer $ID (主键)
@@ -12,12 +11,10 @@ use Illuminate\Database\Eloquent\Builder;
  * @property mixed $LocalIp 本机ip
  * @property string $ExpiredTime 过期时间
  * @property string $Code 绑定code
- * @property integer $IsValid 是否有效
- * @property string $TenantCode
- * @property string $CreateTime
- * @property string $CreateBy
- * @property string $UpdateTime
- * @property string $UpdateBy
+ * @property mixed $delete_time 
+ * @property string $created_at 创建时间
+ * @property string $updated_at 更新时间
+ * @property integer $admin_id
  */
 class Serverinfo extends Base
 {
@@ -34,26 +31,7 @@ class Serverinfo extends Base
      * @var string
      */
     protected $primaryKey = 'ID';
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
-    /**
-     * Boot the model and apply global scope.
-     *
-     * @return void
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        // 全局作用域，默认添加 IsValid 为 1 的条件
-        static::addGlobalScope('isvalid', function (Builder $builder) {
-            $builder->where('IsValid', 1);
-        });
-    }
+    
+    
+    
 }

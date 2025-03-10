@@ -9,28 +9,11 @@ use plugin\admin\app\controller\Crud;
 use support\exception\BusinessException;
 
 /**
- * 账号信息
+ * 账号信息 
  */
-class AccountMsgListController extends Crud
+class AccountmsglistController extends Crud
 {
-//    protected $noNeedLogin = ['test'];
-
-    public function test()
-    {
-        // 模拟响应数据
-        $data = [
-            'status' => 'aaaaa',
-            'message' => 'This is a test response.',
-            'data' => [] // 根据需求填充数据
-        ];
-
-        // 使用 Laravel 的 response() 辅助函数返回 JSON 响应
-        return $this->success("ok", $data);
-    }
-
-
-
-
+    
     /**
      * @var Accountmsglist
      */
@@ -44,7 +27,7 @@ class AccountMsgListController extends Crud
     {
         $this->model = new Accountmsglist;
     }
-
+    
     /**
      * 浏览
      * @return Response

@@ -30,9 +30,6 @@ Route::any('/app/admin/fbApi/getVmTaskName', [fbController::class, 'getVmTaskNam
 
 Route::any('/app/admin/account/loginPost', [AccountController::class, 'loginPost']);
 
-Route::get('/app/admin/AccountMsgList/test', [AccountMsgListController::class, 'test']);
-
-
 Route::any('/app/admin/account/captcha/{type}', [AccountController::class, 'captcha']);
 
 Route::any('/app/admin/dict/get/{name}', [DictController::class, 'get']);

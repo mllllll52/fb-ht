@@ -13,12 +13,9 @@ use plugin\admin\app\model\Base;
  * @property mixed $Data2 
  * @property integer $Int1 帐号使用状态
  * @property integer $AccountMsgId 帐号信息
- * @property integer $IsValid 是否有效
- * @property string $TenantCode 
- * @property string $CreateTime 
- * @property string $CreateBy 
- * @property string $UpdateTime 
- * @property string $UpdateBy
+ * @property mixed $created_at 
+ * @property mixed $updated_at 
+ * @property integer $admin_id
  */
 class Fbaccount extends Base
 {
@@ -35,13 +32,7 @@ class Fbaccount extends Base
      * @var string
      */
     protected $primaryKey = 'ID';
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
+    
     
     
 }

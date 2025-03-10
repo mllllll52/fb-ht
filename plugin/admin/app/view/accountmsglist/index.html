@@ -10,7 +10,129 @@
     <body class="pear-container">
     
         <!-- 顶部查询表单 -->
-        
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <form class="layui-form top-search-from">
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">ID</label>
+                        <div class="layui-input-block">
+                            <div class="layui-input-block">
+                                <input type="hidden" autocomplete="off" name="ID[]" value="like" class="layui-input inline-block">
+                                <input type="number" autocomplete="off" name="ID[]" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">姓别</label>
+                        <div class="layui-input-block">
+                            <div class="layui-input-block">
+                                <input type="hidden" autocomplete="off" name="Sex[]" value="like" class="layui-input inline-block">
+                                <input type="number" autocomplete="off" name="Sex[]" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">此帐号每天可增加好友数量</label>
+                        <div class="layui-input-block">
+                            <div class="layui-input-block">
+                                <input type="hidden" autocomplete="off" name="AddFriendNum[]" value="like" class="layui-input inline-block">
+                                <input type="number" autocomplete="off" name="AddFriendNum[]" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">每次加好友随机间隔时间</label>
+                        <div class="layui-input-block">
+                            <textarea name="AddFriendTimeOut" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">年龄</label>
+                        <div class="layui-input-block">
+                            <textarea name="Age" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">国家</label>
+                        <div class="layui-input-block">
+                            <div class="layui-input-block">
+                                <input type="hidden" autocomplete="off" name="AddCityId[]" value="like" class="layui-input inline-block">
+                                <input type="number" autocomplete="off" name="AddCityId[]" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">方案信息</label>
+                        <div class="layui-input-block">
+                            <div class="layui-input-block">
+                                <input type="hidden" autocomplete="off" name="FriendRuleId[]" value="like" class="layui-input inline-block">
+                                <input type="text" autocomplete="off" name="FriendRuleId[]" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">描述</label>
+                        <div class="layui-input-block">
+                            <textarea name="Desc" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">created_at</label>
+                        <div class="layui-input-block">
+                            <div class="layui-input-block" id="created_at">
+                                <input type="text" autocomplete="off" name="created_at[]" id="created_at-date-start" class="layui-input inline-block" placeholder="开始时间">
+                                -
+                                <input type="text" autocomplete="off" name="created_at[]" id="created_at-date-end" class="layui-input inline-block" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">updated_at</label>
+                        <div class="layui-input-block">
+                            <div class="layui-input-block" id="updated_at">
+                                <input type="text" autocomplete="off" name="updated_at[]" id="updated_at-date-start" class="layui-input inline-block" placeholder="开始时间">
+                                -
+                                <input type="text" autocomplete="off" name="updated_at[]" id="updated_at-date-end" class="layui-input inline-block" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">admin_id</label>
+                        <div class="layui-input-block">
+                            <div class="layui-input-block">
+                                <input type="hidden" autocomplete="off" name="admin_id[]" value="like" class="layui-input inline-block">
+                                <input type="number" autocomplete="off" name="admin_id[]" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item layui-inline">
+                        <label class="layui-form-label"></label>
+                        <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="table-query">
+                            <i class="layui-icon layui-icon-search"></i>查询
+                        </button>
+                        <button type="reset" class="pear-btn pear-btn-md" lay-submit lay-filter="table-reset">
+                            <i class="layui-icon layui-icon-refresh"></i>重置
+                        </button>
+                    </div>
+                    <div class="toggle-btn">
+                        <a class="layui-hide">展开<i class="layui-icon layui-icon-down"></i></a>
+                        <a class="layui-hide">收起<i class="layui-icon layui-icon-up"></i></a>
+                    </div>
+                </form>
+            </div>
+        </div>
         
         <!-- 数据表格 -->
         <div class="layui-card">
@@ -50,6 +172,24 @@
             const INSERT_URL = "/app/admin/accountmsglist/insert";
             const UPDATE_URL = "/app/admin/accountmsglist/update";
             
+            // 字段 created_at created_at
+            layui.use(["laydate"], function() {
+                layui.laydate.render({
+                    elem: "#created_at",
+                    range: ["#created_at-date-start", "#created_at-date-end"],
+                    type: "datetime",
+                });
+            })
+            
+            // 字段 updated_at updated_at
+            layui.use(["laydate"], function() {
+                layui.laydate.render({
+                    elem: "#updated_at",
+                    range: ["#updated_at-date-start", "#updated_at-date-end"],
+                    type: "datetime",
+                });
+            })
+            
             // 表格渲染
             layui.use(["table", "form", "common", "popup", "util"], function() {
                 let table = layui.table;
@@ -66,42 +206,46 @@
 					},{
 						title: "ID",align: "center",
 						field: "ID",
+						sort: true,
 					},{
 						title: "姓别",align: "center",
 						field: "Sex",
+						sort: true,
 					},{
-                        title: "此帐号每天可增加好友数量",
-                        align: "center",
-                        field: "AddFriendNum",
-                        width: 200 // 你可以调整这个值
-                    },{
-						title: "每次加好友随机间隔时间", align: "center",
-						field: "AddFriendTimeOut", width: 200 // 你可以调整这个值
-
-                    },{
+						title: "此帐号每天可增加好友数量",align: "center",
+						field: "AddFriendNum",
+						sort: true,
+					},{
+						title: "每次加好友随机间隔时间",align: "center",
+						field: "AddFriendTimeOut",
+						sort: true,
+					},{
 						title: "年龄",align: "center",
 						field: "Age",
+						sort: true,
 					},{
 						title: "国家",align: "center",
 						field: "AddCityId",
+						sort: true,
 					},{
 						title: "方案信息",align: "center",
 						field: "FriendRuleId",
+						sort: true,
 					},{
 						title: "描述",align: "center",
 						field: "Desc",
+						sort: true,
 					},{
-						title: "租户号 ",align: "center",
-						field: "TenantCode",
+						title: "created_at",align: "center",
+						field: "created_at",
+						sort: true,
 					},{
-						title: "创建时间",align: "center",
-						field: "CreateTime",
+						title: "updated_at",align: "center",
+						field: "updated_at",
+						sort: true,
 					},{
-						title: "创建者",align: "center",
-						field: "CreateBy",
-					},{
-						title: "更新时间    ",align: "center",
-						field: "UpdateTime",
+						title: "admin_id",align: "center",
+						field: "admin_id",
 					},{
 						title: "操作",
 						toolbar: "#table-bar",
@@ -199,7 +343,7 @@
                         title: "新增",
                         shade: 0.1,
                         maxmin: true,
-                        area: [common.isModile() ? "100%" : "800px", common.isModile() ? "80%" : "600px"],
+                        area: [common.isModile()?"100%":"500px", common.isModile()?"100%":"450px"],
                         content: INSERT_URL
                     });
                 }

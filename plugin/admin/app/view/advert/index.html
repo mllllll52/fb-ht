@@ -10,7 +10,83 @@
     <body class="pear-container">
     
         <!-- 顶部查询表单 -->
-        
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <form class="layui-form top-search-from">
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">ID</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="ID" value="" class="layui-input">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">广告内容</label>
+                        <div class="layui-input-block">
+                            <textarea name="Msg" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">提供的备注字段</label>
+                        <div class="layui-input-block">
+                            <textarea name="Desc" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">广告组</label>
+                        <div class="layui-input-block">
+                            <textarea name="GroupNameId" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">created_at</label>
+                        <div class="layui-input-block">
+                            <div class="layui-input-block" id="created_at">
+                                <input type="text" autocomplete="off" name="created_at[]" id="created_at-date-start" class="layui-input inline-block" placeholder="开始时间">
+                                -
+                                <input type="text" autocomplete="off" name="created_at[]" id="created_at-date-end" class="layui-input inline-block" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">updated_at</label>
+                        <div class="layui-input-block">
+                            <div class="layui-input-block" id="updated_at">
+                                <input type="text" autocomplete="off" name="updated_at[]" id="updated_at-date-start" class="layui-input inline-block" placeholder="开始时间">
+                                -
+                                <input type="text" autocomplete="off" name="updated_at[]" id="updated_at-date-end" class="layui-input inline-block" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">admin_id</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="admin_id" value="" class="layui-input">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item layui-inline">
+                        <label class="layui-form-label"></label>
+                        <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="table-query">
+                            <i class="layui-icon layui-icon-search"></i>查询
+                        </button>
+                        <button type="reset" class="pear-btn pear-btn-md" lay-submit lay-filter="table-reset">
+                            <i class="layui-icon layui-icon-refresh"></i>重置
+                        </button>
+                    </div>
+                    <div class="toggle-btn">
+                        <a class="layui-hide">展开<i class="layui-icon layui-icon-down"></i></a>
+                        <a class="layui-hide">收起<i class="layui-icon layui-icon-up"></i></a>
+                    </div>
+                </form>
+            </div>
+        </div>
         
         <!-- 数据表格 -->
         <div class="layui-card">
@@ -50,6 +126,24 @@
             const INSERT_URL = "/app/admin/advert/insert";
             const UPDATE_URL = "/app/admin/advert/update";
             
+            // 字段 created_at created_at
+            layui.use(["laydate"], function() {
+                layui.laydate.render({
+                    elem: "#created_at",
+                    range: ["#created_at-date-start", "#created_at-date-end"],
+                    type: "datetime",
+                });
+            })
+            
+            // 字段 updated_at updated_at
+            layui.use(["laydate"], function() {
+                layui.laydate.render({
+                    elem: "#updated_at",
+                    range: ["#updated_at-date-start", "#updated_at-date-end"],
+                    type: "datetime",
+                });
+            })
+            
             // 表格渲染
             layui.use(["table", "form", "common", "popup", "util"], function() {
                 let table = layui.table;
@@ -66,33 +160,30 @@
 					},{
 						title: "ID",align: "center",
 						field: "ID",
+						sort: true,
 					},{
 						title: "广告内容",align: "center",
 						field: "Msg",
+						sort: true,
 					},{
 						title: "提供的备注字段",align: "center",
 						field: "Desc",
+						sort: true,
 					},{
 						title: "广告组",align: "center",
 						field: "GroupNameId",
+						sort: true,
 					},{
-						title: "是否有效",align: "center",
-						field: "IsValid",
+						title: "created_at",align: "center",
+						field: "created_at",
+						sort: true,
 					},{
-						title: "TenantCode",align: "center",
-						field: "TenantCode",
+						title: "updated_at",align: "center",
+						field: "updated_at",
+						sort: true,
 					},{
-						title: "CreateTime",align: "center",
-						field: "CreateTime",
-					},{
-						title: "CreateBy",align: "center",
-						field: "CreateBy",
-					},{
-						title: "UpdateTime",align: "center",
-						field: "UpdateTime",
-					},{
-						title: "UpdateBy",align: "center",
-						field: "UpdateBy",
+						title: "admin_id",align: "center",
+						field: "admin_id",
 					},{
 						title: "操作",
 						toolbar: "#table-bar",

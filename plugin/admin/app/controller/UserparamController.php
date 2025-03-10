@@ -13,6 +13,7 @@ use support\exception\BusinessException;
  */
 class UserparamController extends Crud
 {
+    
     /**
      * @var Userparam
      */

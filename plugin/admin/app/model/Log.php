@@ -12,12 +12,9 @@ use plugin\admin\app\model\Base;
  * @property mixed $Imei Imei
  * @property mixed $VmName 模拟器名
  * @property mixed $ErrorTypeId 错误类型
- * @property integer $IsValid 是否有效
- * @property string $TenantCode 
- * @property string $CreateTime 
- * @property string $CreateBy 
- * @property string $UpdateTime 
- * @property string $UpdateBy
+ * @property mixed $created_at 
+ * @property mixed $updated_at 
+ * @property integer $admin_id
  */
 class Log extends Base
 {
@@ -34,13 +31,7 @@ class Log extends Base
      * @var string
      */
     protected $primaryKey = 'ID';
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
+    
     
     
 }

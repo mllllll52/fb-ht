@@ -36,59 +36,45 @@
                         </div>
                     </div>
                     
-                    <div class="layui-form-item" style="display:none;">
+                    <div class="layui-form-item">
                         <label class="layui-form-label">过期时间</label>
                         <div class="layui-input-block">
                             <input type="text" name="ExpiredTime" id="ExpiredTime" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     
-                    <div class="layui-form-item" style="display:none;">
+                    <div class="layui-form-item">
                         <label class="layui-form-label">绑定code</label>
                         <div class="layui-input-block">
                             <input type="text" name="Code" value="" class="layui-input">
                         </div>
                     </div>
                     
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label required">是否有效</label>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">delete_time</label>
                         <div class="layui-input-block">
-                            <input type="number" name="IsValid" value="" required lay-verify="required" class="layui-input">
+                            <input type="text" name="delete_time" value="" class="layui-input">
                         </div>
                     </div>
                     
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">TenantCode</label>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">创建时间</label>
                         <div class="layui-input-block">
-                            <input type="text" name="TenantCode" value="" class="layui-input">
+                            <input type="number" name="created_at" value="" class="layui-input">
                         </div>
                     </div>
                     
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">CreateTime</label>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">更新时间</label>
                         <div class="layui-input-block">
-                            <input type="text" name="CreateTime" id="CreateTime" autocomplete="off" class="layui-input">
+                            <input type="text" name="updated_at" value="" class="layui-input">
                         </div>
                     </div>
                     
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">CreateBy</label>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">admin_id</label>
                         <div class="layui-input-block">
-                            <input type="text" name="CreateBy" value="" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">UpdateTime</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="UpdateTime" id="UpdateTime" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">UpdateBy</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="UpdateBy" value="" class="layui-input">
+                            <input type="number" name="admin_id" value="" class="layui-input">
                         </div>
                     </div>
                     
@@ -152,22 +138,6 @@
                             });
                         })
                         
-                        // 字段 CreateTime CreateTime
-                        layui.use(["laydate"], function() {
-                            layui.laydate.render({
-                                elem: "#CreateTime",
-                                type: "datetime",
-                            });
-                        })
-                        
-                        // 字段 UpdateTime UpdateTime
-                        layui.use(["laydate"], function() {
-                            layui.laydate.render({
-                                elem: "#UpdateTime",
-                                type: "datetime",
-                            });
-                        })
-                        
                         
                         // ajax返回失败
                         if (res.code) {
@@ -191,7 +161,6 @@
                 });
                 layui.form.on("submit(save)", function (data) {
                     data.field[PRIMARY_KEY] = layui.url().search[PRIMARY_KEY];
-
                     layui.$.ajax({
                         url: UPDATE_API,
                         type: "POST",

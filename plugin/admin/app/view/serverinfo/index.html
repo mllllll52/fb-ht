@@ -10,7 +10,104 @@
     <body class="pear-container">
     
         <!-- 顶部查询表单 -->
-        
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <form class="layui-form top-search-from">
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">ID</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="ID" value="" class="layui-input">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">当前可运行最大数量</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="RunMaxLimit" value="" class="layui-input">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">服务器描述</label>
+                        <div class="layui-input-block">
+                            <textarea name="Desc" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">本机ip</label>
+                        <div class="layui-input-block">
+                            <textarea name="LocalIp" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">过期时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="ExpiredTime" id="ExpiredTime" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">绑定code</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="Code" value="" class="layui-input">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">delete_time</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="delete_time" value="" class="layui-input">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">创建时间</label>
+                        <div class="layui-input-block">
+                            <div class="layui-input-block">
+                                <input type="number" autocomplete="off" name="created_at[]" class="layui-input inline-block" placeholder="开始">
+                                -
+                                <input type="number" autocomplete="off" name="created_at[]" class="layui-input inline-block" placeholder="结束">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">更新时间</label>
+                        <div class="layui-input-block">
+                            <div class="layui-input-block">
+                                <input type="text" autocomplete="off" name="updated_at[]" class="layui-input inline-block" placeholder="开始">
+                                -
+                                <input type="text" autocomplete="off" name="updated_at[]" class="layui-input inline-block" placeholder="结束">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">admin_id</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="admin_id" value="" class="layui-input">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item layui-inline">
+                        <label class="layui-form-label"></label>
+                        <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="table-query">
+                            <i class="layui-icon layui-icon-search"></i>查询
+                        </button>
+                        <button type="reset" class="pear-btn pear-btn-md" lay-submit lay-filter="table-reset">
+                            <i class="layui-icon layui-icon-refresh"></i>重置
+                        </button>
+                    </div>
+                    <div class="toggle-btn">
+                        <a class="layui-hide">展开<i class="layui-icon layui-icon-down"></i></a>
+                        <a class="layui-hide">收起<i class="layui-icon layui-icon-up"></i></a>
+                    </div>
+                </form>
+            </div>
+        </div>
         
         <!-- 数据表格 -->
         <div class="layui-card">
@@ -50,6 +147,14 @@
             const INSERT_URL = "/app/admin/serverinfo/insert";
             const UPDATE_URL = "/app/admin/serverinfo/update";
             
+            // 字段 过期时间 ExpiredTime
+            layui.use(["laydate"], function() {
+                layui.laydate.render({
+                    elem: "#ExpiredTime",
+                    type: "datetime",
+                });
+            })
+            
             // 表格渲染
             layui.use(["table", "form", "common", "popup", "util"], function() {
                 let table = layui.table;
@@ -66,13 +171,11 @@
 					},{
 						title: "ID",align: "center",
 						field: "ID",
-
-                    },{
-                        title: "当前可运行最大数量",
-                        align: "center",
-                        field: "RunMaxLimit",
-                        width: 300
-                    },{
+						sort: true,
+					},{
+						title: "当前可运行最大数量",align: "center",
+						field: "RunMaxLimit",
+					},{
 						title: "服务器描述",align: "center",
 						field: "Desc",
 					},{
@@ -85,23 +188,17 @@
 						title: "绑定code",align: "center",
 						field: "Code",
 					},{
-						title: "是否有效",align: "center",
-						field: "IsValid",hide: true,
-                    },{
-						title: "TenantCode",align: "center",
-						field: "TenantCode",hide: true,
+						title: "delete_time",align: "center",
+						field: "delete_time",
 					},{
-						title: "CreateTime",align: "center",
-						field: "CreateTime",hide: true,
+						title: "创建时间",align: "center",
+						field: "created_at",
 					},{
-						title: "CreateBy",align: "center",
-						field: "CreateBy",hide: true,
+						title: "更新时间",align: "center",
+						field: "updated_at",
 					},{
-						title: "UpdateTime",align: "center",
-						field: "UpdateTime",hide: true,
-					},{
-						title: "UpdateBy",align: "center",
-						field: "UpdateBy",hide: true,
+						title: "admin_id",align: "center",
+						field: "admin_id",
 					},{
 						title: "操作",
 						toolbar: "#table-bar",
@@ -110,7 +207,7 @@
 						width: 120,
 					}
 				];
-
+				
 				// 渲染表格
 				table.render({
 				    elem: "#data-table",
@@ -130,7 +227,8 @@
 				        layer.photos({photos: 'div[lay-id="data-table"]', anim: 5});
 				    }
 				});
-
+				
+				
                 // 编辑或删除行事件
                 table.on("tool(data-table)", function(obj) {
                     if (obj.event === "remove") {
@@ -208,7 +306,7 @@
                     let value = obj.data[PRIMARY_KEY];
                     layer.open({
                         type: 2,
-                        title: "编辑",
+                        title: "修改",
                         shade: 0.1,
                         maxmin: true,
                         area: [common.isModile()?"100%":"500px", common.isModile()?"100%":"450px"],
@@ -218,7 +316,7 @@
 
                 // 删除一行
                 let remove = function(obj) {
-                    return updateInvalidStatus(obj.data[PRIMARY_KEY]);
+                    return doRemove(obj.data[PRIMARY_KEY]);
                 }
 
                 // 删除多行
@@ -228,46 +326,8 @@
                         layui.popup.warning("未选中数据");
                         return false;
                     }
-                    updateInvalidStatus(checkIds.split(","));
+                    doRemove(checkIds.split(","));
                 }
-
-
-
-                let updateInvalidStatus = function(ids) {
-
-                    let data = {};
-                    data.field[PRIMARY_KEY] = layui.url().search[PRIMARY_KEY];
-
-                    console.log(data);
-                    console.log("发送的请求数据：", data); // 打印请求数据，确保 isValid 为 0
-
-                    layer.confirm("确定设置为无效?", {
-                        icon: 3,
-                        title: "提示"
-                    }, function(index) {
-                        layer.close(index);
-                        let loading = layer.load();
-                        $.ajax({
-                            url: UPDATE_API, // 你可以替换成相应的更新 API
-                            data: data,
-                            dataType: "json",
-                            type: "post", // 使用 POST 请求来执行更新
-                            success: function(res) {
-                                layer.close(loading);
-                                console.log("返回结果：", res); // 打印返回结果
-
-                                if (res.code) {
-                                    return layui.popup.failure(res.msg);
-                                }
-                                return layui.popup.success("操作成功", refreshTable);
-                            },
-                            error: function(xhr, status, error) {
-                                console.log("请求错误：", error); // 打印请求错误信息
-                            }
-                        })
-                    });
-                }
-
 
                 // 执行删除
                 let doRemove = function (ids) {

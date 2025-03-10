@@ -32,25 +32,9 @@ class ServerinfoController extends Crud
      * 浏览
      * @return Response
      */
-    public function index(Request $request): Response
+    public function index(): Response
     {
-        // 获取查询参数（假设筛选条件为 'filter'）
-        $filter = $request->input('filter', '');
-
-        // 初始化查询构建器
-        $query = $this->model->where('IsValid', 1); // 默认筛选 IsValid 为 1 的数据
-
-        // 如果提供了过滤条件，添加筛选逻辑
-        if ($filter) {
-            // 假设您想根据服务器名称进行模糊查询
-            $query->where('ServerName', 'like', '%' . $filter . '%');
-        }
-
-        // 执行查询
-        $data = $query->get();
-
-        // 将筛选后的数据传递到视图
-        return view('serverinfo/index', ['data' => $data]);
+        return view('serverinfo/index');
     }
 
     /**

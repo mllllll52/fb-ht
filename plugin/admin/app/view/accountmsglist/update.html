@@ -6,103 +6,85 @@
         <link rel="stylesheet" href="/app/admin/component/pear/css/pear.css" />
         <link rel="stylesheet" href="/app/admin/component/jsoneditor/css/jsoneditor.css" />
         <link rel="stylesheet" href="/app/admin/admin/css/reset.css" />
+        
     </head>
     <body>
+
         <form class="layui-form">
+
             <div class="mainBox">
                 <div class="main-container mr-5">
-
+                    
                     <div class="layui-form-item">
-                        <label class="layui-form-label2">姓别</label>
+                        <label class="layui-form-label">姓别</label>
                         <div class="layui-input-block">
                             <input type="number" name="Sex" value="" class="layui-input">
                         </div>
                     </div>
-
+                    
                     <div class="layui-form-item">
                         <label class="layui-form-label">此帐号每天可增加好友数量</label>
                         <div class="layui-input-block">
                             <input type="number" name="AddFriendNum" value="" class="layui-input">
                         </div>
                     </div>
-
+                    
                     <div class="layui-form-item">
                         <label class="layui-form-label">每次加好友随机间隔时间</label>
                         <div class="layui-input-block">
                             <textarea name="AddFriendTimeOut" class="layui-textarea"></textarea>
                         </div>
                     </div>
-
+                    
                     <div class="layui-form-item">
                         <label class="layui-form-label">年龄</label>
                         <div class="layui-input-block">
                             <textarea name="Age" class="layui-textarea"></textarea>
                         </div>
                     </div>
-
+                    
                     <div class="layui-form-item">
                         <label class="layui-form-label">国家</label>
                         <div class="layui-input-block">
                             <input type="number" name="AddCityId" value="" class="layui-input">
                         </div>
                     </div>
-
+                    
                     <div class="layui-form-item">
                         <label class="layui-form-label">方案信息</label>
                         <div class="layui-input-block">
                             <input type="text" name="FriendRuleId" value="" class="layui-input">
                         </div>
                     </div>
-
+                    
                     <div class="layui-form-item">
                         <label class="layui-form-label">描述</label>
                         <div class="layui-input-block">
                             <textarea name="Desc" class="layui-textarea"></textarea>
                         </div>
                     </div>
-
+                    
                     <div class="layui-form-item">
-                        <label class="layui-form-label">是否有效</label>
+                        <label class="layui-form-label">created_at</label>
                         <div class="layui-input-block">
-                            <input type="number" name="IsValid" value="" class="layui-input">
+                            <input type="text" name="created_at" id="created_at" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-
+                    
                     <div class="layui-form-item">
-                        <label class="layui-form-label">TenantCode</label>
+                        <label class="layui-form-label">updated_at</label>
                         <div class="layui-input-block">
-                            <input type="text" name="TenantCode" value="" class="layui-input">
+                            <input type="text" name="updated_at" id="updated_at" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-
+                    
                     <div class="layui-form-item">
-                        <label class="layui-form-label">CreateTime</label>
+                        <label class="layui-form-label">admin_id</label>
                         <div class="layui-input-block">
-                            <input type="text" name="CreateTime" id="CreateTime" autocomplete="off" class="layui-input">
+                            <input type="number" name="admin_id" value="" class="layui-input">
                         </div>
                     </div>
-
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">CreateBy</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="CreateBy" value="" class="layui-input">
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">UpdateTime</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="UpdateTime" id="UpdateTime" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">UpdateBy</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="UpdateBy" value="" class="layui-input">
-                        </div>
-                    </div>
-
+                    
                 </div>
             </div>
 
@@ -116,16 +98,16 @@
                     </button>
                 </div>
             </div>
-
+            
         </form>
 
         <script src="/app/admin/component/layui/layui.js?v=2.8.12"></script>
         <script src="/app/admin/component/pear/pear.js"></script>
         <script src="/app/admin/component/jsoneditor/jsoneditor.js"></script>
         <script src="/app/admin/admin/js/permission.js"></script>
-
-
+        
         <script>
+
             // 相关接口
             const PRIMARY_KEY = "ID";
             const SELECT_API = "/app/admin/accountmsglist/select" + location.search;
@@ -155,18 +137,18 @@
                             }
                         });
                         
-                        // 字段 CreateTime CreateTime
+                        // 字段 created_at created_at
                         layui.use(["laydate"], function() {
                             layui.laydate.render({
-                                elem: "#CreateTime",
+                                elem: "#created_at",
                                 type: "datetime",
                             });
                         })
                         
-                        // 字段 UpdateTime UpdateTime
+                        // 字段 updated_at updated_at
                         layui.use(["laydate"], function() {
                             layui.laydate.render({
-                                elem: "#UpdateTime",
+                                elem: "#updated_at",
                                 type: "datetime",
                             });
                         })

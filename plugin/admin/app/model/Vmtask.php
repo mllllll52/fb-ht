@@ -9,11 +9,9 @@ use plugin\admin\app\model\Base;
  * @property mixed $VTypeId 模拟器任务类型
  * @property mixed $VmWorkList 模拟器打开列表
  * @property mixed $LocalIp 内网Ip
- * @property string $TenantCode 
- * @property string $CreateTime 
- * @property string $CreateBy 
- * @property string $UpdateTime 
- * @property string $UpdateBy
+ * @property mixed $created_at 
+ * @property mixed $updated_at 
+ * @property integer $admin_id
  */
 class Vmtask extends Base
 {
@@ -30,13 +28,7 @@ class Vmtask extends Base
      * @var string
      */
     protected $primaryKey = 'ID';
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
+    
     
     
 }

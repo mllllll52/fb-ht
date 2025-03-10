@@ -34,14 +34,13 @@
                             <textarea name="LocalIp" class="layui-textarea"></textarea>
                         </div>
                     </div>
-
-                    <div class="layui-form-item" style="display:none;">
+                    
+                    <div class="layui-form-item">
                         <label class="layui-form-label">过期时间</label>
                         <div class="layui-input-block">
                             <input type="text" name="ExpiredTime" id="ExpiredTime" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">绑定code</label>
@@ -50,45 +49,31 @@
                         </div>
                     </div>
                     
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label required">是否有效</label>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">delete_time</label>
                         <div class="layui-input-block">
-                            <input type="number" name="IsValid" value="1" required lay-verify="required" class="layui-input">
+                            <input type="text" name="delete_time" value="" class="layui-input">
                         </div>
                     </div>
-
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">TenantCode</label>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">创建时间</label>
                         <div class="layui-input-block">
-                            <input type="text" name="TenantCode" value="" class="layui-input">
+                            <input type="number" name="created_at" value="" class="layui-input">
                         </div>
                     </div>
-
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">CreateTime</label>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">更新时间</label>
                         <div class="layui-input-block">
-                            <input type="text" name="CreateTime" id="CreateTime" autocomplete="off" class="layui-input">
+                            <input type="text" name="updated_at" value="" class="layui-input">
                         </div>
                     </div>
-
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">CreateBy</label>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">admin_id</label>
                         <div class="layui-input-block">
-                            <input type="text" name="CreateBy" value="" class="layui-input">
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">UpdateTime</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="UpdateTime" id="UpdateTime" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">UpdateBy</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="UpdateBy" value="" class="layui-input">
+                            <input type="number" name="admin_id" value="" class="layui-input">
                         </div>
                     </div>
                     
@@ -127,22 +112,6 @@
                 });
             })
             
-            // 字段 CreateTime CreateTime
-            layui.use(["laydate"], function() {
-                layui.laydate.render({
-                    elem: "#CreateTime",
-                    type: "datetime",
-                });
-            })
-            
-            // 字段 UpdateTime UpdateTime
-            layui.use(["laydate"], function() {
-                layui.laydate.render({
-                    elem: "#UpdateTime",
-                    type: "datetime",
-                });
-            })
-            
             //提交事件
             layui.use(["form", "popup"], function () {
                 // 字段验证允许为空
@@ -150,24 +119,15 @@
                     phone: [/(^$)|^1\d{10}$/, "请输入正确的手机号"],
                     email: [/(^$)|^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/, "邮箱格式不正确"],
                     url: [/(^$)|(^#)|(^http(s*):\/\/[^\s]+\.[^\s]+)/, "链接格式不正确"],
-                    number: [/(^$)|^\d+$/, "只能填写数字"],
+                    number: [/(^$)|^\d+$/,'只能填写数字'],
                     date: [/(^$)|^(\d{4})[-\/](\d{1}|0\d{1}|1[0-2])([-\/](\d{1}|0\d{1}|[1-2][0-9]|3[0-1]))*$/, "日期格式不正确"],
                     identity: [/(^$)|(^\d{15}$)|(^\d{17}(x|X|\d)$)/, "请输入正确的身份证号"]
                 });
-
                 layui.form.on("submit(save)", function (data) {
-                    // 获取当前时间
-                    var currentTime = new Date().toLocaleString();
-
-                    // 给相应的字段赋值
-                    data.field.CreateTime = currentTime;
-                    data.field.UpdateTime = currentTime;
-                    data.field.IsValid = 1;
-
                     layui.$.ajax({
                         url: INSERT_API,
                         type: "POST",
-                        dataType: "json",
+                        dateType: "json",
                         data: data.field,
                         success: function (res) {
                             if (res.code) {
@@ -179,11 +139,9 @@
                             });
                         }
                     });
-
                     return false;
                 });
             });
-
 
         </script>
 

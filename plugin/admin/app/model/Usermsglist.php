@@ -14,12 +14,9 @@ use plugin\admin\app\model\Base;
  * @property mixed $VideoReplyId 视频回复
  * @property mixed $PostsReplyId 帖子回复
  * @property integer $KeyWorldId 关键字
- * @property integer $IsValid 是否有效
- * @property string $TenantCode 
- * @property string $CreateTime 
- * @property string $CreateBy 
- * @property string $UpdateTime 
- * @property string $UpdateBy
+ * @property mixed $created_at 
+ * @property mixed $updated_at 
+ * @property integer $admin_id
  */
 class Usermsglist extends Base
 {
@@ -36,13 +33,7 @@ class Usermsglist extends Base
      * @var string
      */
     protected $primaryKey = 'ID';
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
+    
     
     
 }

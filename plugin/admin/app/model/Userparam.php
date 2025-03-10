@@ -20,12 +20,9 @@ use plugin\admin\app\model\Base;
  * @property integer $ServerIdId 服务列表ID
  * @property integer $UserMsgId 个人信息
  * @property integer $IsSend 发广告
- * @property integer $IsValid 是否有效
- * @property string $TenantCode 
- * @property string $CreateTime 
- * @property string $CreateBy 
- * @property string $UpdateTime 
- * @property string $UpdateBy
+ * @property mixed $created_at 
+ * @property mixed $updated_at 
+ * @property integer $admin_id
  */
 class Userparam extends Base
 {
@@ -42,13 +39,7 @@ class Userparam extends Base
      * @var string
      */
     protected $primaryKey = 'ID';
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
+    
     
     
 }

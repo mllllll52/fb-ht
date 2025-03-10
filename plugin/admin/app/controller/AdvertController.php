@@ -9,7 +9,7 @@ use plugin\admin\app\controller\Crud;
 use support\exception\BusinessException;
 
 /**
- * 广告子项管理 
+ * 广告子选项管理 
  */
 class AdvertController extends Crud
 {

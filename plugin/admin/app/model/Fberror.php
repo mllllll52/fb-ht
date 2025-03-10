@@ -11,12 +11,9 @@ use plugin\admin\app\model\Base;
  * @property mixed $VmName 模拟器名
  * @property mixed $Msg 错误信息
  * @property mixed $ExData 其他数据
- * @property integer $IsValid 是否有效
- * @property string $TenantCode 
- * @property string $CreateTime 
- * @property string $CreateBy 
- * @property string $UpdateTime 
- * @property string $UpdateBy
+ * @property mixed $created_at 
+ * @property mixed $updated_at 
+ * @property integer $admin_id
  */
 class Fberror extends Base
 {
@@ -33,13 +30,7 @@ class Fberror extends Base
      * @var string
      */
     protected $primaryKey = 'ID';
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
+    
     
     
 }

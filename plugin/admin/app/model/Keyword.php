@@ -8,12 +8,9 @@ use plugin\admin\app\model\Base;
  * @property integer $ID (主键)
  * @property mixed $Msg 关键字内容
  * @property mixed $ExData 备用字段
- * @property integer $IsValid 是否有效
- * @property string $TenantCode 
- * @property string $CreateTime 
- * @property string $CreateBy 
- * @property string $UpdateTime 
- * @property string $UpdateBy
+ * @property mixed $created_at 
+ * @property mixed $updated_at 
+ * @property integer $admin_id
  */
 class Keyword extends Base
 {
@@ -30,13 +27,7 @@ class Keyword extends Base
      * @var string
      */
     protected $primaryKey = 'ID';
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
+    
     
     
 }

@@ -9,7 +9,7 @@ use plugin\admin\app\controller\Crud;
 use support\exception\BusinessException;
 
 /**
- * 任务 
+ * 用户信息 
  */
 class UsermsglistController extends Crud
 {
