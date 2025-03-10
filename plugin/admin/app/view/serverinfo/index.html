@@ -17,28 +17,32 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">ID</label>
                         <div class="layui-input-block">
-                            <input type="number" name="ID" value="" class="layui-input">
+                            <div class="layui-input-block">
+                                <input type="hidden" autocomplete="off" name="ID[]" value="like" class="layui-input inline-block">
+                                <input type="number" autocomplete="off" name="ID[]" class="layui-input">
+                            </div>
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
-                        <label class="layui-form-label">当前可运行最大数量</label>
+                        <label class="layui-form-label" style="width: 180px;" >当前可运行最大数量</label>
                         <div class="layui-input-block">
-                            <input type="number" name="RunMaxLimit" value="" class="layui-input">
+                            <input type="hidden" autocomplete="off" name="RunMaxLimit[]" value="like" class="layui-input inline-block">
+                            <input type="number" autocomplete="off" name="RunMaxLimit[]" class="layui-input">
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">服务器描述</label>
                         <div class="layui-input-block">
-                            <textarea name="Desc" class="layui-textarea"></textarea>
+                            <input type="text" name="Desc" class="layui-input"></input>
                         </div>
                     </div>
-                    
+
                     <div class="layui-form-item">
                         <label class="layui-form-label">本机ip</label>
                         <div class="layui-input-block">
-                            <textarea name="LocalIp" class="layui-textarea"></textarea>
+                            <input type="text" name="LocalIp" class="layui-input"></input>
                         </div>
                     </div>
                     
@@ -189,7 +193,7 @@
 						field: "Code",
 					},{
 						title: "delete_time",align: "center",
-						field: "delete_time",
+						field: "delete_time",hide: true,
 					},{
 						title: "创建时间",align: "center",
 						field: "created_at",
