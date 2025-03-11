@@ -24,9 +24,16 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">服务列表ID</label>
                         <div class="layui-input-block">
-                            <input type="number" name="ServerIdId" value="" class="layui-input">
+                            <select name="ServerIdId" id="serverSelect" lay-filter="serverSelect">
+                                <option value="1">服务 1</option>
+                                <option value="2">服务 2</option>
+                                <option value="3">服务 3</option>
+                            </select>
                         </div>
                     </div>
+
+
+
 
                     <div class="layui-form-item" style="display:none;">
                         <label class="layui-form-label">模拟器名称</label>
@@ -176,7 +183,8 @@
                     type: "datetime",
                 });
             })
-            
+
+
             //提交事件
             layui.use(["form", "popup"], function () {
                 // 字段验证允许为空
