@@ -65,4 +65,22 @@ class ServerinfoController extends Crud
         return view('serverinfo/update');
     }
 
+    /**
+     * 批量修改
+     * @param Request $request
+     * @return Response
+     * @throws BusinessException
+     */
+    public function batchUpdate(Request $request): Response
+    {
+        if ($request->method() === 'POST') {
+            return parent::batchUpdate($request);
+        }
+        return view('serverinfo/batchUpdate');
+    }
+
+
+
+
+
 }

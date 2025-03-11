@@ -125,6 +125,9 @@
             <button class="pear-btn pear-btn-primary pear-btn-md" lay-event="add" permission="app.admin.serverinfo.insert">
                 <i class="layui-icon layui-icon-add-1"></i>新增
             </button>
+            <button class="pear-btn pear-btn-primary pear-btn-md" lay-event="batchUpdate" permission="app.admin.serverinfo.batchUpdate">
+                <i class="layui-icon layui-icon-batchUpdate"></i>批量修改
+            </button>
             <button class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove" permission="app.admin.serverinfo.delete">
                 <i class="layui-icon layui-icon-delete"></i>删除
             </button>
@@ -150,7 +153,8 @@
             const DELETE_API = "/app/admin/serverinfo/delete";
             const INSERT_URL = "/app/admin/serverinfo/insert";
             const UPDATE_URL = "/app/admin/serverinfo/update";
-            
+            const BATCHUPDATE_URL = "/app/admin/serverinfo/batchUpdate";
+
             // 字段 过期时间 ExpiredTime
             layui.use(["laydate"], function() {
                 layui.laydate.render({
@@ -166,8 +170,7 @@
                 let $ = layui.$;
                 let common = layui.common;
                 let util = layui.util;
-                
-				// 表头参数
+                // 表头参数
 				let cols = [
 					{
 						type: "checkbox",
@@ -250,6 +253,8 @@
                         refreshTable();
                     } else if (obj.event === "batchRemove") {
                         batchRemove(obj);
+                    } else if (obj.event === "batchUpdate") {
+                        batchUpdate(obj);
                     }
                 });
 
@@ -332,6 +337,26 @@
                     }
                     doRemove(checkIds.split(","));
                 }
+
+                // 批量修改
+                let batchUpdate = function(obj) {
+                    let checkIds = common.checkField(obj, PRIMARY_KEY);
+                    console.log("length:", obj.length);
+                    if (checkIds === "") {
+                        layui.popup.warning("未选中数据");
+                        return false;
+                    }
+                    sessionStorage.setItem("batchUpdateIds", JSON.stringify(checkIds.split(",")));
+                    layer.open({
+                        type: 2,
+                        title: "批量修改",
+                        shade: 0.1,
+                        maxmin: true,
+                        area: [common.isModile() ? "100%" : "500px", common.isModile() ? "100%" : "450px"],
+                        content: BATCHUPDATE_URL
+                    });
+                };
+
 
                 // 执行删除
                 let doRemove = function (ids) {

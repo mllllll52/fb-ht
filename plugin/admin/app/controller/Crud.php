@@ -21,6 +21,97 @@ class Crud extends Base
     protected $model = null;
 
     /**
+     * 批量修改
+     * @param Request $request
+     * @return Response
+     * @throws BusinessException
+     */
+    public function batchUpdate(Request $request): Response
+    {
+        $ids = $this->batchUpdateInput($request);
+        $this->doBatchUpdate($request);
+        return $this->json(0);
+    }
+
+    /**
+     * 批量更新前置方法
+     * @param Request $request
+     * @return array
+     * @throws BusinessException
+     */
+    protected function batchUpdateInput(Request $request): array
+    {
+        $primary_key = $this->model->getKeyName();
+        if (!$primary_key) {
+            throw new BusinessException('该表无主键，不支持更新');
+        }
+
+        // 获取要更新的 ID
+        $ids = (array)$request->post($primary_key, []);
+        if (!$ids) {
+            throw new BusinessException('缺少更新的 ID');
+        }
+
+        // 不是超级管理员，进行权限检查
+        if (!Auth::isSuperAdmin()) {
+            $admin_ids = [];
+            if ($this->dataLimit) {
+                $admin_ids = $this->model->whereIn($primary_key, $ids)->pluck($this->dataLimitField)->toArray();
+            }
+
+            if ($this->dataLimit == 'personal') {
+                if (!in_array(admin_id(), $admin_ids)) {
+                    throw new BusinessException('无数据权限');
+                }
+            } elseif ($this->dataLimit == 'auth') {
+                if (array_diff($admin_ids, Auth::getScopeAdminIds(true))) {
+                    throw new BusinessException('无数据权限');
+                }
+            }
+        }
+
+        return $ids;
+    }
+
+
+    /**
+     * 执行批量更新
+     * @param Request $request
+     * @return void
+     * @throws BusinessException
+     */
+    protected function doBatchUpdate(Request $request)
+    {
+        // 获取提交的数据
+        $data = $request->post();
+        $ids = array_map('intval', $data["ID"]);
+
+        // 过滤掉为空的字段（避免覆盖原数据）
+        $updateData = array_filter($data, function ($value) {
+            return $value !== '' && $value !== null;
+        });
+        unset($updateData["ID"]); // 防止更新 ID 字段
+
+        if (empty($updateData)) {
+            throw new BusinessException('没有可更新的字段');
+        }
+
+        if (empty($ids)) {
+            throw new \Exception("ID 数组为空，无法执行更新");
+        }
+
+        if (empty($updateData)) {
+            throw new \Exception("updateData 为空，无法执行更新");
+        }
+
+        // 批量更新
+        $this->model->whereIn($this->model->getKeyName(), $ids)->update($updateData);
+
+    }
+
+
+
+    /**
      * 查询
      * @param Request $request
      * @return Response
