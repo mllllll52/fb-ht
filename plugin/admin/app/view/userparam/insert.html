@@ -13,46 +13,32 @@
 
             <div class="mainBox">
                 <div class="main-container mr-5">
-
+                    
                     <div class="layui-form-item">
-                        <label class="layui-form-label">增加数量绑定</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="CreateNum" value="" class="layui-input">
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">服务列表ID</label>
-                        <div class="layui-input-block">
-                            <select name="ServerIdId" id="serverSelect" lay-filter="serverSelect">
-                                <option value="1">服务 1</option>
-                                <option value="2">服务 2</option>
-                                <option value="3">服务 3</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="layui-form-item" style="display:none;">
                         <label class="layui-form-label">模拟器名称</label>
                         <div class="layui-input-block">
                             <input type="text" name="VmName" value="" class="layui-input">
                         </div>
                     </div>
-
-                    <div class="layui-form-item" style="display:none;">
+                    
+                    <div class="layui-form-item">
                         <label class="layui-form-label">Imei</label>
                         <div class="layui-input-block">
                             <input type="text" name="Imei" value="" class="layui-input">
                         </div>
                     </div>
-
-                    <div class="layui-form-item" style="display:none;">
+                    
+                    <div class="layui-form-item">
                         <label class="layui-form-label">链接</label>
                         <div class="layui-input-block">
                             <textarea name="Link" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">描述</label>
+                        <div class="layui-input-block">
+                            <textarea name="Desc" class="layui-textarea"></textarea>
                         </div>
                     </div>
                     
@@ -63,40 +49,56 @@
                         </div>
                     </div>
                     
-                    <div class="layui-form-item" style="display:none;">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">增加数量绑定</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="CreateNum" value="" class="layui-input">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
                         <label class="layui-form-label">当前好友数量</label>
                         <div class="layui-input-block">
                             <input type="number" name="NowFriendNum" value="" class="layui-input">
                         </div>
                     </div>
-
-                    <div class="layui-form-item" style="display:none;">
+                    
+                    <div class="layui-form-item">
                         <label class="layui-form-label">拓展数据</label>
                         <div class="layui-input-block">
                             <textarea name="ExData" class="layui-textarea"></textarea>
                         </div>
                     </div>
-
-                    <div class="layui-form-item" style="display:none;">
+                    
+                    <div class="layui-form-item">
                         <label class="layui-form-label">拓展字段2</label>
                         <div class="layui-input-block">
                             <textarea name="ExData2" class="layui-textarea"></textarea>
                         </div>
                     </div>
-
-                    <div class="layui-form-item" style="display:none;">
+                    
+                    <div class="layui-form-item">
                         <label class="layui-form-label">拓展字段3</label>
                         <div class="layui-input-block">
                             <textarea name="ExData3" class="layui-textarea"></textarea>
                         </div>
                     </div>
-
-                    <div class="layui-form-item" style="display:none;">
+                    
+                    <div class="layui-form-item">
                         <label class="layui-form-label">绑定帐号</label>
                         <div class="layui-input-block">
                             <textarea name="TempStr3" class="layui-textarea"></textarea>
                         </div>
                     </div>
+
+                    <!-- 下拉选择框 -->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">服务列表ID</label>
+                        <div class="layui-input-block">
+                            <div id="ServerIdId"></div> <!-- 这里是 xmSelect 绑定的元素 -->
+                        </div>
+                    </div>
+
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">个人信息</label>
@@ -111,33 +113,25 @@
                             <input type="number" name="IsSend" value="" class="layui-input">
                         </div>
                     </div>
-
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">创建时间</label>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">created_at</label>
                         <div class="layui-input-block">
                             <input type="text" name="created_at" id="created_at" value="CURRENT_TIMESTAMP" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">更新时间</label>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">updated_at</label>
                         <div class="layui-input-block">
                             <input type="text" name="updated_at" id="updated_at" value="CURRENT_TIMESTAMP" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">用户</label>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">admin_id</label>
                         <div class="layui-input-block">
                             <input type="number" name="admin_id" value="" class="layui-input">
-                        </div>
-                    </div>
-
-
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">描述</label>
-                        <div class="layui-input-block">
-                            <textarea name="Desc" class="layui-textarea"></textarea>
                         </div>
                     </div>
                     
@@ -167,6 +161,33 @@
 
             // 相关接口
             const INSERT_API = "/app/admin/userparam/insert";
+
+            layui.use(["jquery", "xmSelect"], function() {
+                let $ = layui.$;
+
+                // 假设从另一个表获取数据（这里用模拟数据）
+                let serverData = [
+                    { name: "服务 1", value: "1" },
+                    { name: "服务 2", value: "2" },
+                    { name: "服务 3", value: "3" }
+                ];
+
+                layui.xmSelect.render({
+                    el: "#ServerIdId",  // 绑定 xmSelect
+                    name: "ServerIdId",  // 表单字段名
+                    filterable: true,  // 允许搜索
+                    clickClose: true,  // 单选后自动关闭
+                    radio: true,  // 单选模式
+                    model: {
+                        "icon": "hidden",  // 隐藏前面的图标
+                        "label": {
+                            "type": "text"  // 只显示文本
+                        }
+                    },
+                    data: serverData  // 绑定数据
+                });
+            });
+
             
             // 字段 created_at created_at
             layui.use(["laydate"], function() {
@@ -183,8 +204,7 @@
                     type: "datetime",
                 });
             })
-
-
+            
             //提交事件
             layui.use(["form", "popup"], function () {
                 // 字段验证允许为空

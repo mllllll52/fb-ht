@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     
-                    <div class="layui-form-item" >
+                    <div class="layui-form-item">
                         <label class="layui-form-label">描述</label>
                         <div class="layui-input-block">
                             <textarea name="Desc" class="layui-textarea"></textarea>
@@ -95,7 +95,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">服务列表ID</label>
                         <div class="layui-input-block">
-                            <input type="number" name="ServerIdId" value="" class="layui-input">
+                            <div name="ServerIdId" id="ServerIdId" value="" ></div>
                         </div>
                     </div>
                     
@@ -184,6 +184,21 @@
                                 obj.attr("value", value);
                                 obj[0].value = value;
                             }
+                        });
+                        
+                        // 字段 服务列表ID ServerIdId
+                        layui.use(["jquery", "xmSelect"], function() {
+                            let value = layui.$("#ServerIdId").attr("value");
+                            let initValue = value ? value.split(",") : [];
+                            layui.xmSelect.render({
+                                el: "#ServerIdId",
+                                name: "ServerIdId",
+                                filterable: true,
+                                initValue: initValue,
+                                model: {"icon":"hidden","label":{"type":"text"}},
+                                clickClose: true,
+                                radio: true,
+                            })
                         });
                         
                         // 字段 created_at created_at

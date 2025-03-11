@@ -101,7 +101,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">服务列表ID</label>
                         <div class="layui-input-block">
-                            <input type="number" name="ServerIdId" value="" class="layui-input">
+                            <div name="ServerIdId" id="ServerIdId" value="" ></div>
                         </div>
                     </div>
                     
@@ -203,6 +203,21 @@
             const INSERT_URL = "/app/admin/userparam/insert";
             const UPDATE_URL = "/app/admin/userparam/update";
             
+            // 字段 服务列表ID ServerIdId
+            layui.use(["jquery", "xmSelect"], function() {
+                let value = layui.$("#ServerIdId").attr("value");
+                let initValue = value ? value.split(",") : [];
+                layui.xmSelect.render({
+                    el: "#ServerIdId",
+                    name: "ServerIdId",
+                    filterable: true,
+                    initValue: initValue,
+                    model: {"icon":"hidden","label":{"type":"text"}},
+                    clickClose: true,
+                    radio: true,
+                })
+            });
+            
             // 字段 created_at created_at
             layui.use(["laydate"], function() {
                 layui.laydate.render({
@@ -274,6 +289,15 @@
 					},{
 						title: "服务列表ID",align: "center",
 						field: "ServerIdId",
+						templet: function (d) {
+							let field = "ServerIdId";
+							if (typeof d[field] == "undefined") return "";
+							let items = [];
+							layui.each((d[field] + "").split(","), function (k , v) {
+								items.push(apiResults[field][v] || v);
+							});
+							return util.escape(items.join(","));
+						}
 					},{
 						title: "个人信息",align: "center",
 						field: "UserMsgId",
@@ -318,7 +342,9 @@
 				    }
 				});
 				
-				
+				// 获取表格中下拉或树形组件数据
+				let apiResults = {};
+				apiResults["ServerIdId"] = [];
                 // 编辑或删除行事件
                 table.on("tool(data-table)", function(obj) {
                     if (obj.event === "remove") {
