@@ -80,24 +80,24 @@ class UserparamController extends Crud
             $vmData["updated_at"] = $currentTime;
             $vmData["admin_id"] = $admin_id;
         }
-        Util::db()->table('vmtask')->insert($vmData);
+
+
+        // 增加定时器
+        $this->vmtaskInsert($vmData);
         $data["CreateNum"] = 1;
         $id = $this->doInsert($data);
         return $this->json(0, 'ok', ['id' => $id]);
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 插入模拟器任务列表
+     * @return Response
+     */
+    private function vmtaskInsert($data):void
+    {
+         Util::db()->table('vmTask')->insert($data);
+    }
 
 
     /**
