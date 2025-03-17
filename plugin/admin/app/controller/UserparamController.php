@@ -82,11 +82,25 @@ class UserparamController extends Crud
         }
 
 
-        // 增加定时器
+        // test 增加定时器
+
         $this->vmtaskInsert($vmData);
+        $data["TempStr3"] = $this->bindAccountData($vmData);
+
         $data["CreateNum"] = 1;
         $id = $this->doInsert($data);
         return $this->json(0, 'ok', ['id' => $id]);
+    }
+
+
+    /**
+     * 绑定账号数据
+     */
+    private function bindAccountData($data):string
+    {
+        $keys = Util::db()->table('fbAccount')->where('admin_id', admin_id())->where('Int1', '!=', 2)->get()->toArray();
+        Util::db()->table('fbAccount')->where('id', $keys[0]->ID)->update(['Int1' => '2']);
+        return $keys[0]->ID;
     }
 
 
