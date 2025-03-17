@@ -18,7 +18,9 @@ class UsermsglistController extends Crud
      * @var Usermsglist
      */
     protected $model = null;
+    protected $dataLimit = "personal";
 
+    protected $dataLimitField = "admin_id";
     /**
      * 构造函数
      * @return void

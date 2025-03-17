@@ -17,42 +17,21 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">模拟器任务类型</label>
                         <div class="layui-input-block">
-                            <input type="text" name="VTypeId" value="" class="layui-input">
+                            <div name="VTypeId" id="VTypeId" value="" ></div>
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">模拟器打开列表</label>
                         <div class="layui-input-block">
-                            <textarea name="VmWorkList" class="layui-textarea"></textarea>
+                            <input type="text" name="VmWorkList" value="" class="layui-input">
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">内网Ip</label>
                         <div class="layui-input-block">
-                            <textarea name="LocalIp" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">created_at</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="created_at" id="created_at" value="CURRENT_TIMESTAMP" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">updated_at</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="updated_at" id="updated_at" value="CURRENT_TIMESTAMP" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">admin_id</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="admin_id" value="" class="layui-input">
+                            <input type="text" name="LocalIp" value="" class="layui-input">
                         </div>
                     </div>
                     
@@ -83,21 +62,30 @@
             // 相关接口
             const INSERT_API = "/app/admin/vmtask/insert";
             
-            // 字段 created_at created_at
-            layui.use(["laydate"], function() {
-                layui.laydate.render({
-                    elem: "#created_at",
-                    type: "datetime",
+            // 字段 模拟器任务类型 VTypeId
+            layui.use(["jquery", "xmSelect", "popup"], function() {
+                layui.$.ajax({
+                    url: "/app/admin/dict/get/vmTaskMap",
+                    dataType: "json",
+                    success: function (res) {
+                        let value = layui.$("#VTypeId").attr("value");
+                        let initValue = value ? value.split(",") : [];
+                        layui.xmSelect.render({
+                            el: "#VTypeId",
+                            name: "VTypeId",
+                            initValue: initValue,
+                            filterable: true,
+                            data: res.data, 
+                            model: {"icon":"hidden","label":{"type":"text"}},
+                            clickClose: true,
+                            radio: true,
+                        });
+                        if (res.code) {
+                            layui.popup.failure(res.msg);
+                        }
+                    }
                 });
-            })
-            
-            // 字段 updated_at updated_at
-            layui.use(["laydate"], function() {
-                layui.laydate.render({
-                    elem: "#updated_at",
-                    type: "datetime",
-                });
-            })
+            });
             
             //提交事件
             layui.use(["form", "popup"], function () {

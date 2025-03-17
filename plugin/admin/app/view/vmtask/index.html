@@ -15,59 +15,20 @@
                 <form class="layui-form top-search-from">
                     
                     <div class="layui-form-item">
-                        <label class="layui-form-label">ID</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="ID" value="" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
                         <label class="layui-form-label">模拟器任务类型</label>
                         <div class="layui-input-block">
-                            <input type="text" name="VTypeId" value="" class="layui-input">
+                            <div name="VTypeId" id="VTypeId" value="" ></div>
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
-                        <label class="layui-form-label">模拟器打开列表</label>
-                        <div class="layui-input-block">
-                            <textarea name="VmWorkList" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">内网Ip</label>
-                        <div class="layui-input-block">
-                            <textarea name="LocalIp" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">created_at</label>
+                        <label class="layui-form-label">创建时间</label>
                         <div class="layui-input-block">
                             <div class="layui-input-block" id="created_at">
                                 <input type="text" autocomplete="off" name="created_at[]" id="created_at-date-start" class="layui-input inline-block" placeholder="开始时间">
                                 -
                                 <input type="text" autocomplete="off" name="created_at[]" id="created_at-date-end" class="layui-input inline-block" placeholder="结束时间">
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">updated_at</label>
-                        <div class="layui-input-block">
-                            <div class="layui-input-block" id="updated_at">
-                                <input type="text" autocomplete="off" name="updated_at[]" id="updated_at-date-start" class="layui-input inline-block" placeholder="开始时间">
-                                -
-                                <input type="text" autocomplete="off" name="updated_at[]" id="updated_at-date-end" class="layui-input inline-block" placeholder="结束时间">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">admin_id</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="admin_id" value="" class="layui-input">
                         </div>
                     </div>
                     
@@ -126,20 +87,36 @@
             const INSERT_URL = "/app/admin/vmtask/insert";
             const UPDATE_URL = "/app/admin/vmtask/update";
             
-            // 字段 created_at created_at
+            // 字段 模拟器任务类型 VTypeId
+            layui.use(["jquery", "xmSelect", "popup"], function() {
+                layui.$.ajax({
+                    url: "/app/admin/dict/get/vmTaskMap",
+                    dataType: "json",
+                    success: function (res) {
+                        let value = layui.$("#VTypeId").attr("value");
+                        let initValue = value ? value.split(",") : [];
+                        layui.xmSelect.render({
+                            el: "#VTypeId",
+                            name: "VTypeId",
+                            initValue: initValue,
+                            filterable: true,
+                            data: res.data, 
+                            model: {"icon":"hidden","label":{"type":"text"}},
+                            clickClose: true,
+                            radio: true,
+                        });
+                        if (res.code) {
+                            layui.popup.failure(res.msg);
+                        }
+                    }
+                });
+            });
+            
+            // 字段 创建时间 created_at
             layui.use(["laydate"], function() {
                 layui.laydate.render({
                     elem: "#created_at",
                     range: ["#created_at-date-start", "#created_at-date-end"],
-                    type: "datetime",
-                });
-            })
-            
-            // 字段 updated_at updated_at
-            layui.use(["laydate"], function() {
-                layui.laydate.render({
-                    elem: "#updated_at",
-                    range: ["#updated_at-date-start", "#updated_at-date-end"],
                     type: "datetime",
                 });
             })
@@ -160,25 +137,39 @@
 					},{
 						title: "ID",align: "center",
 						field: "ID",
-						sort: true,
 					},{
 						title: "模拟器任务类型",align: "center",
 						field: "VTypeId",
+						sort: true,
+						templet: function (d) {
+							let field = "VTypeId";
+							if (typeof d[field] == "undefined") return "";
+							let items = [];
+							layui.each((d[field] + "").split(","), function (k , v) {
+								items.push(apiResults[field][v] || v);
+							});
+							return util.escape(items.join(","));
+						}
 					},{
 						title: "模拟器打开列表",align: "center",
 						field: "VmWorkList",
+						sort: true,
 					},{
 						title: "内网Ip",align: "center",
 						field: "LocalIp",
+						sort: true,
 					},{
-						title: "created_at",align: "center",
+						title: "创建时间",align: "center",
 						field: "created_at",
+						sort: true,
 					},{
-						title: "updated_at",align: "center",
+						title: "更新时间",align: "center",
 						field: "updated_at",
+						hide: true,
 					},{
-						title: "admin_id",align: "center",
+						title: "用户id",align: "center",
 						field: "admin_id",
+						hide: true,
 					},{
 						title: "操作",
 						toolbar: "#table-bar",
@@ -189,25 +180,64 @@
 				];
 				
 				// 渲染表格
-				table.render({
-				    elem: "#data-table",
-				    url: SELECT_API,
-				    page: true,
-				    cols: [cols],
-				    skin: "line",
-				    size: "lg",
-				    toolbar: "#table-toolbar",
-				    autoSort: false,
-				    defaultToolbar: [{
-				        title: "刷新",
-				        layEvent: "refresh",
-				        icon: "layui-icon-refresh",
-				    }, "filter", "print", "exports"],
-				    done: function () {
-				        layer.photos({photos: 'div[lay-id="data-table"]', anim: 5});
-				    }
-				});
+				function render()
+				{
+				    table.render({
+				        elem: "#data-table",
+				        url: SELECT_API,
+				        page: true,
+				        cols: [cols],
+				        skin: "line",
+				        size: "lg",
+				        toolbar: "#table-toolbar",
+				        autoSort: false,
+				        defaultToolbar: [{
+				            title: "刷新",
+				            layEvent: "refresh",
+				            icon: "layui-icon-refresh",
+				        }, "filter", "print", "exports"],
+				        done: function () {
+				            layer.photos({photos: 'div[lay-id="data-table"]', anim: 5});
+				        }
+				    });
+				}
 				
+				// 获取表格中下拉或树形组件数据
+				let apis = [];
+				apis.push(["VTypeId", "/app/admin/dict/get/vmTaskMap"]);
+				let apiResults = {};
+				apiResults["VTypeId"] = [];
+				let count = apis.length;
+				layui.each(apis, function (k, item) {
+				    let [field, url] = item;
+				    $.ajax({
+				        url: url,
+				        dateType: "json",
+				        success: function (res) {
+				            if (res.code) {
+				                return layui.popup.failure(res.msg);
+				            }
+				            function travel(items) {
+				                for (let k in items) {
+				                    let item = items[k];
+				                    apiResults[field][item.value] = item.name;
+				                    if (item.children) {
+				                        travel(item.children);
+				                    }
+				                }
+				            }
+				            travel(res.data);
+				        },
+				        complete: function () {
+				            if (--count === 0) {
+				                render();
+				            }
+				        }
+				    });
+				});
+				if (!count) {
+				    render();
+				}
 				
                 // 编辑或删除行事件
                 table.on("tool(data-table)", function(obj) {

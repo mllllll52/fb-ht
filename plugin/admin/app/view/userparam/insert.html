@@ -31,107 +31,63 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">链接</label>
                         <div class="layui-input-block">
-                            <textarea name="Link" class="layui-textarea"></textarea>
+                            <input type="text" name="Link" value="" class="layui-input">
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">描述</label>
                         <div class="layui-input-block">
-                            <textarea name="Desc" class="layui-textarea"></textarea>
+                            <input type="text" name="Desc" value="" class="layui-input">
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">任务进度</label>
                         <div class="layui-input-block">
-                            <input type="text" name="ProId" value="" class="layui-input">
+                            <div name="ProId" id="ProId" value="0" ></div>
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">增加数量绑定</label>
                         <div class="layui-input-block">
-                            <input type="number" name="CreateNum" value="" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">当前好友数量</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="NowFriendNum" value="" class="layui-input">
+                            <input type="number" name="CreateNum" value="1" class="layui-input">
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">拓展数据</label>
                         <div class="layui-input-block">
-                            <textarea name="ExData" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">拓展字段2</label>
-                        <div class="layui-input-block">
-                            <textarea name="ExData2" class="layui-textarea"></textarea>
+                            <input type="text" name="ExData" value="" class="layui-input">
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">拓展字段3</label>
                         <div class="layui-input-block">
-                            <textarea name="ExData3" class="layui-textarea"></textarea>
+                            <input type="text" name="ExData3" value="" class="layui-input">
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
-                        <label class="layui-form-label">绑定帐号</label>
-                        <div class="layui-input-block">
-                            <textarea name="TempStr3" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-
-                    <!-- 下拉选择框 -->
-                    <div class="layui-form-item">
                         <label class="layui-form-label">服务列表ID</label>
                         <div class="layui-input-block">
-                            <div id="ServerIdId"></div> <!-- 这里是 xmSelect 绑定的元素 -->
+                            <div name="ServerIdId" id="ServerIdId" value="" ></div>
                         </div>
                     </div>
-
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">个人信息</label>
                         <div class="layui-input-block">
-                            <input type="number" name="UserMsgId" value="" class="layui-input">
+                            <div name="UserMsgId" id="UserMsgId" value="" ></div>
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
-                        <label class="layui-form-label">发广告</label>
+                        <label class="layui-form-label">每日任务列表</label>
                         <div class="layui-input-block">
-                            <input type="number" name="IsSend" value="" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">created_at</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="created_at" id="created_at" value="CURRENT_TIMESTAMP" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">updated_at</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="updated_at" id="updated_at" value="CURRENT_TIMESTAMP" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">admin_id</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="admin_id" value="" class="layui-input">
+                            <div name="ProTask" id="ProTask" value="" ></div>
                         </div>
                     </div>
                     
@@ -160,50 +116,106 @@
         <script>
 
             // 相关接口
-            const INSERT_API = "/app/admin/userparam/insert";
-
-            layui.use(["jquery", "xmSelect"], function() {
-                let $ = layui.$;
-
-                // 假设从另一个表获取数据（这里用模拟数据）
-                let serverData = [
-                    { name: "服务 1", value: "1" },
-                    { name: "服务 2", value: "2" },
-                    { name: "服务 3", value: "3" }
-                ];
-
-                layui.xmSelect.render({
-                    el: "#ServerIdId",  // 绑定 xmSelect
-                    name: "ServerIdId",  // 表单字段名
-                    filterable: true,  // 允许搜索
-                    clickClose: true,  // 单选后自动关闭
-                    radio: true,  // 单选模式
-                    model: {
-                        "icon": "hidden",  // 隐藏前面的图标
-                        "label": {
-                            "type": "text"  // 只显示文本
+            const INSERT_API = "/app/admin/userparam/addTask";
+            
+            // 字段 任务进度 ProId
+            layui.use(["jquery", "xmSelect", "popup"], function() {
+                layui.$.ajax({
+                    url: "/app/admin/dict/get/userProType",
+                    dataType: "json",
+                    success: function (res) {
+                        let value = layui.$("#ProId").attr("value");
+                        let initValue = value ? value.split(",") : [];
+                        layui.xmSelect.render({
+                            el: "#ProId",
+                            name: "ProId",
+                            initValue: initValue,
+                            filterable: true,
+                            data: res.data, 
+                            value: "0",
+                            model: {"icon":"hidden","label":{"type":"text"}},
+                            clickClose: true,
+                            radio: true,
+                        });
+                        if (res.code) {
+                            layui.popup.failure(res.msg);
                         }
-                    },
-                    data: serverData  // 绑定数据
+                    }
                 });
             });
-
             
-            // 字段 created_at created_at
-            layui.use(["laydate"], function() {
-                layui.laydate.render({
-                    elem: "#created_at",
-                    type: "datetime",
+            // 字段 服务列表ID ServerIdId
+            layui.use(["jquery", "xmSelect", "popup"], function() {
+                layui.$.ajax({
+                    url: "/app/admin/base/getServerMap",
+                    dataType: "json",
+                    success: function (res) {
+                        let value = layui.$("#ServerIdId").attr("value");
+                        let initValue = value ? value.split(",") : [];
+                        layui.xmSelect.render({
+                            el: "#ServerIdId",
+                            name: "ServerIdId",
+                            initValue: initValue,
+                            filterable: true,
+                            data: res.data, 
+                            model: {"icon":"hidden","label":{"type":"text"}},
+                            clickClose: true,
+                            radio: true,
+                        });
+                        if (res.code) {
+                            layui.popup.failure(res.msg);
+                        }
+                    }
                 });
-            })
+            });
             
-            // 字段 updated_at updated_at
-            layui.use(["laydate"], function() {
-                layui.laydate.render({
-                    elem: "#updated_at",
-                    type: "datetime",
+            // 字段 个人信息 UserMsgId
+            layui.use(["jquery", "xmSelect", "popup"], function() {
+                layui.$.ajax({
+                    url: "/app/admin/base/getUserMap",
+                    dataType: "json",
+                    success: function (res) {
+                        let value = layui.$("#UserMsgId").attr("value");
+                        let initValue = value ? value.split(",") : [];
+                        layui.xmSelect.render({
+                            el: "#UserMsgId",
+                            name: "UserMsgId",
+                            initValue: initValue,
+                            filterable: true,
+                            data: res.data, 
+                            model: {"icon":"hidden","label":{"type":"text"}},
+                            clickClose: true,
+                            radio: true,
+                        });
+                        if (res.code) {
+                            layui.popup.failure(res.msg);
+                        }
+                    }
                 });
-            })
+            });
+            
+            // 字段 每日任务列表 ProTask
+            layui.use(["jquery", "xmSelect", "popup"], function() {
+                layui.$.ajax({
+                    url: "/app/admin/dict/get/EveryDayDicProTask",
+                    dataType: "json",
+                    success: function (res) {
+                        let value = layui.$("#ProTask").attr("value");
+                        let initValue = value ? value.split(",") : [];
+                        layui.xmSelect.render({
+                            el: "#ProTask",
+                            name: "ProTask",
+                            initValue: initValue,
+                            filterable: true,
+                            data: res.data, 
+                            toolbar: {"show":true,"list":["ALL","CLEAR","REVERSE"]},
+                        });
+                        if (res.code) {
+                            layui.popup.failure(res.msg);
+                        }
+                    }
+                });
+            });
             
             //提交事件
             layui.use(["form", "popup"], function () {

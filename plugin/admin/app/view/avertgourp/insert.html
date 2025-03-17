@@ -17,70 +17,21 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label required">组名称</label>
                         <div class="layui-input-block">
-                            <textarea name="GroupName" required lay-verify="required" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">ExData</label>
-                        <div class="layui-input-block">
-                            <textarea name="ExData" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">ExData2</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="ExData2" value="" class="layui-input">
+                            <input type="text" name="GroupName" value="" required lay-verify="required" class="layui-input">
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">备注</label>
                         <div class="layui-input-block">
-                            <textarea name="Desc" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">姓别</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="Sex" value="" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">年龄</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="Age" value="" class="layui-input">
+                            <input type="text" name="Desc" value="" class="layui-input">
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">广告类型</label>
                         <div class="layui-input-block">
-                            <input type="text" name="UTypeId" value="" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">created_at</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="created_at" id="created_at" value="CURRENT_TIMESTAMP" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">updated_at</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="updated_at" id="updated_at" value="CURRENT_TIMESTAMP" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">admin_id</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="admin_id" value="" class="layui-input">
+                            <div name="UTypeId" id="UTypeId" value="" ></div>
                         </div>
                     </div>
                     
@@ -111,21 +62,30 @@
             // 相关接口
             const INSERT_API = "/app/admin/avertgourp/insert";
             
-            // 字段 created_at created_at
-            layui.use(["laydate"], function() {
-                layui.laydate.render({
-                    elem: "#created_at",
-                    type: "datetime",
+            // 字段 广告类型 UTypeId
+            layui.use(["jquery", "xmSelect", "popup"], function() {
+                layui.$.ajax({
+                    url: "/app/admin/dict/get/avertType",
+                    dataType: "json",
+                    success: function (res) {
+                        let value = layui.$("#UTypeId").attr("value");
+                        let initValue = value ? value.split(",") : [];
+                        layui.xmSelect.render({
+                            el: "#UTypeId",
+                            name: "UTypeId",
+                            initValue: initValue,
+                            filterable: true,
+                            data: res.data, 
+                            model: {"icon":"hidden","label":{"type":"text"}},
+                            clickClose: true,
+                            radio: true,
+                        });
+                        if (res.code) {
+                            layui.popup.failure(res.msg);
+                        }
+                    }
                 });
-            })
-            
-            // 字段 updated_at updated_at
-            layui.use(["laydate"], function() {
-                layui.laydate.render({
-                    elem: "#updated_at",
-                    type: "datetime",
-                });
-            })
+            });
             
             //提交事件
             layui.use(["form", "popup"], function () {

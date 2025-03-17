@@ -15,84 +15,32 @@
                 <form class="layui-form top-search-from">
                     
                     <div class="layui-form-item">
-                        <label class="layui-form-label">ID</label>
+                        <label class="layui-form-label">服务器描述</label>
                         <div class="layui-input-block">
                             <div class="layui-input-block">
-                                <input type="hidden" autocomplete="off" name="ID[]" value="like" class="layui-input inline-block">
-                                <input type="number" autocomplete="off" name="ID[]" class="layui-input">
+                                <input type="hidden" autocomplete="off" name="Desc[]" value="like" class="layui-input inline-block">
+                                <input type="text" autocomplete="off" name="Desc[]" class="layui-input">
                             </div>
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
-                        <label class="layui-form-label" style="width: 180px;" >当前可运行最大数量</label>
-                        <div class="layui-input-block">
-                            <input type="hidden" autocomplete="off" name="RunMaxLimit[]" value="like" class="layui-input inline-block">
-                            <input type="number" autocomplete="off" name="RunMaxLimit[]" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">服务器描述</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="Desc" class="layui-input"></input>
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item">
                         <label class="layui-form-label">本机ip</label>
                         <div class="layui-input-block">
-                            <input type="text" name="LocalIp" class="layui-input"></input>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">过期时间</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="ExpiredTime" id="ExpiredTime" autocomplete="off" class="layui-input">
+                            <div class="layui-input-block">
+                                <input type="hidden" autocomplete="off" name="LocalIp[]" value="like" class="layui-input inline-block">
+                                <input type="text" autocomplete="off" name="LocalIp[]" class="layui-input">
+                            </div>
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">绑定code</label>
                         <div class="layui-input-block">
-                            <input type="text" name="Code" value="" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">delete_time</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="delete_time" value="" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">创建时间</label>
-                        <div class="layui-input-block">
                             <div class="layui-input-block">
-                                <input type="number" autocomplete="off" name="created_at[]" class="layui-input inline-block" placeholder="开始">
-                                -
-                                <input type="number" autocomplete="off" name="created_at[]" class="layui-input inline-block" placeholder="结束">
+                                <input type="hidden" autocomplete="off" name="Code[]" value="like" class="layui-input inline-block">
+                                <input type="text" autocomplete="off" name="Code[]" class="layui-input">
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">更新时间</label>
-                        <div class="layui-input-block">
-                            <div class="layui-input-block">
-                                <input type="text" autocomplete="off" name="updated_at[]" class="layui-input inline-block" placeholder="开始">
-                                -
-                                <input type="text" autocomplete="off" name="updated_at[]" class="layui-input inline-block" placeholder="结束">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">admin_id</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="admin_id" value="" class="layui-input">
                         </div>
                     </div>
                     
@@ -125,9 +73,6 @@
             <button class="pear-btn pear-btn-primary pear-btn-md" lay-event="add" permission="app.admin.serverinfo.insert">
                 <i class="layui-icon layui-icon-add-1"></i>新增
             </button>
-            <button class="pear-btn pear-btn-primary pear-btn-md" lay-event="batchUpdate" permission="app.admin.serverinfo.batchUpdate">
-                <i class="layui-icon layui-icon-batchUpdate"></i>批量修改
-            </button>
             <button class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove" permission="app.admin.serverinfo.delete">
                 <i class="layui-icon layui-icon-delete"></i>删除
             </button>
@@ -153,15 +98,6 @@
             const DELETE_API = "/app/admin/serverinfo/delete";
             const INSERT_URL = "/app/admin/serverinfo/insert";
             const UPDATE_URL = "/app/admin/serverinfo/update";
-            const BATCHUPDATE_URL = "/app/admin/serverinfo/batchUpdate";
-
-            // 字段 过期时间 ExpiredTime
-            layui.use(["laydate"], function() {
-                layui.laydate.render({
-                    elem: "#ExpiredTime",
-                    type: "datetime",
-                });
-            })
             
             // 表格渲染
             layui.use(["table", "form", "common", "popup", "util"], function() {
@@ -170,7 +106,8 @@
                 let $ = layui.$;
                 let common = layui.common;
                 let util = layui.util;
-                // 表头参数
+                
+				// 表头参数
 				let cols = [
 					{
 						type: "checkbox",
@@ -182,6 +119,7 @@
 					},{
 						title: "当前可运行最大数量",align: "center",
 						field: "RunMaxLimit",
+						sort: true,
 					},{
 						title: "服务器描述",align: "center",
 						field: "Desc",
@@ -191,21 +129,26 @@
 					},{
 						title: "过期时间",align: "center",
 						field: "ExpiredTime",
+						sort: true,
 					},{
 						title: "绑定code",align: "center",
 						field: "Code",
 					},{
 						title: "delete_time",align: "center",
-						field: "delete_time",hide: true,
+						field: "delete_time",
+						hide: true,
 					},{
 						title: "创建时间",align: "center",
 						field: "created_at",
+						sort: true,
 					},{
 						title: "更新时间",align: "center",
 						field: "updated_at",
+						hide: true,
 					},{
 						title: "admin_id",align: "center",
 						field: "admin_id",
+						hide: true,
 					},{
 						title: "操作",
 						toolbar: "#table-bar",
@@ -253,8 +196,6 @@
                         refreshTable();
                     } else if (obj.event === "batchRemove") {
                         batchRemove(obj);
-                    } else if (obj.event === "batchUpdate") {
-                        batchUpdate(obj);
                     }
                 });
 
@@ -337,26 +278,6 @@
                     }
                     doRemove(checkIds.split(","));
                 }
-
-                // 批量修改
-                let batchUpdate = function(obj) {
-                    let checkIds = common.checkField(obj, PRIMARY_KEY);
-                    console.log("length:", obj.length);
-                    if (checkIds === "") {
-                        layui.popup.warning("未选中数据");
-                        return false;
-                    }
-                    sessionStorage.setItem("batchUpdateIds", JSON.stringify(checkIds.split(",")));
-                    layer.open({
-                        type: 2,
-                        title: "批量修改",
-                        shade: 0.1,
-                        maxmin: true,
-                        area: [common.isModile() ? "100%" : "500px", common.isModile() ? "100%" : "450px"],
-                        content: BATCHUPDATE_URL
-                    });
-                };
-
 
                 // 执行删除
                 let doRemove = function (ids) {

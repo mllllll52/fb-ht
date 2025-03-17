@@ -25,21 +25,14 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">服务器描述</label>
                         <div class="layui-input-block">
-                            <textarea name="Desc" class="layui-textarea"></textarea>
+                            <input type="text" name="Desc" value="" class="layui-input">
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">本机ip</label>
                         <div class="layui-input-block">
-                            <textarea name="LocalIp" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">过期时间</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="ExpiredTime" id="ExpiredTime" autocomplete="off" class="layui-input">
+                            <input type="text" name="LocalIp" value="" class="layui-input">
                         </div>
                     </div>
                     
@@ -47,34 +40,6 @@
                         <label class="layui-form-label">绑定code</label>
                         <div class="layui-input-block">
                             <input type="text" name="Code" value="" class="layui-input">
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">delete_time</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="delete_time" value="" class="layui-input">
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">创建时间</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="created_at" value="" class="layui-input">
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">更新时间</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="updated_at" value="" class="layui-input">
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item" style="display:none;">
-                        <label class="layui-form-label">admin_id</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="admin_id" value="" class="layui-input">
                         </div>
                     </div>
                     
@@ -129,14 +94,6 @@
                                 obj[0].value = value;
                             }
                         });
-                        
-                        // 字段 过期时间 ExpiredTime
-                        layui.use(["laydate"], function() {
-                            layui.laydate.render({
-                                elem: "#ExpiredTime",
-                                type: "datetime",
-                            });
-                        })
                         
                         
                         // ajax返回失败

@@ -18,7 +18,9 @@ class FbaccountController extends Crud
      * @var Fbaccount
      */
     protected $model = null;
+    protected $dataLimit = "personal";
 
+    protected $dataLimitField = "admin_id";
     /**
      * 构造函数
      * @return void

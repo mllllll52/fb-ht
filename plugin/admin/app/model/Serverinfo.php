@@ -7,8 +7,8 @@ use plugin\admin\app\model\Base;
 /**
  * @property integer $ID (主键)
  * @property integer $RunMaxLimit 当前可运行最大数量
- * @property mixed $Desc 服务器描述
- * @property mixed $LocalIp 本机ip
+ * @property string $Desc 服务器描述
+ * @property string $LocalIp 本机ip
  * @property string $ExpiredTime 过期时间
  * @property string $Code 绑定code
  * @property mixed $delete_time 

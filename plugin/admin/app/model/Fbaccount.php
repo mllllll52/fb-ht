@@ -12,10 +12,9 @@ use plugin\admin\app\model\Base;
  * @property mixed $Data 
  * @property mixed $Data2 
  * @property integer $Int1 帐号使用状态
- * @property integer $AccountMsgId 帐号信息
- * @property mixed $created_at 
- * @property mixed $updated_at 
- * @property integer $admin_id
+ * @property string $created_at 创建时间
+ * @property string $updated_at 更新时间
+ * @property integer $admin_id 用户id
  */
 class Fbaccount extends Base
 {

@@ -7,6 +7,7 @@ use support\Response;
 use plugin\admin\app\model\Userparam;
 use plugin\admin\app\controller\Crud;
 use support\exception\BusinessException;
+use plugin\admin\app\common\Util;
 
 /**
  * 任务 
@@ -18,7 +19,9 @@ class UserparamController extends Crud
      * @var Userparam
      */
     protected $model = null;
+    protected $dataLimit = "personal";
 
+    protected $dataLimitField = "admin_id";
     /**
      * 构造函数
      * @return void
@@ -27,7 +30,76 @@ class UserparamController extends Crud
     {
         $this->model = new Userparam;
     }
-    
+
+
+    /**
+     * 插入新的数据
+     * @return Response
+     */
+    public function addTask(Request $request): Response
+    {
+        $num = $request->post("CreateNum");
+        for ($i = 0; $i < $num; $i++){
+            $this->taskInsert($request);
+        }
+
+        return view('userparam/index');
+    }
+
+
+    //修改上报参数
+    public function taskInsert(Request $request): Response
+    {
+        $admin_id = admin_id();
+        $data = $this->insertInput($request);
+        $ids = $data["ServerIdId"];
+
+        $data["Imei"] = str_pad(rand(0, 999999999999999), 15, '0', STR_PAD_LEFT);
+        $nextId = Util::db()->table('userparams')->max('id') + 1;
+        $keys = Util::db()->table('serverinfo')->where('admin_id', $admin_id)->where('id', $ids)->get()->toArray();
+        $vmData = [];
+        foreach ($keys as $key) {
+            $data["VmName"] = $key->Desc . "-" . $nextId;
+//            新创建的任务数据  默认生成一条新的创建模拟器数据
+            $VmWorkList = [
+                [
+                    "ip" =>  $key->LocalIp,
+                    "VmName" =>  $key->LocalIp,
+                    "Imei" =>  $data["Imei"],
+                    "ID" =>  $nextId,
+                    "ServerName" =>  $key->Desc
+                ]
+            ];
+
+            $vmData["VTypeId"] = 1;
+            $vmData["VmWorkList"] = json_encode($VmWorkList);
+            $vmData["LocalIp"] = $key->LocalIp;
+            $currentTime = date('Y-m-d H:i:s');
+
+            $vmData["created_at"] = $currentTime;
+            $vmData["updated_at"] = $currentTime;
+            $vmData["admin_id"] = $admin_id;
+        }
+        Util::db()->table('vmtask')->insert($vmData);
+        $data["CreateNum"] = 1;
+        $id = $this->doInsert($data);
+        return $this->json(0, 'ok', ['id' => $id]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * 浏览
      * @return Response

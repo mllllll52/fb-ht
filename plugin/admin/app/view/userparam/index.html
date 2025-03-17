@@ -17,84 +17,77 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">ID</label>
                         <div class="layui-input-block">
-                            <input type="number" name="ID" value="" class="layui-input">
+                            <div class="layui-input-block">
+                                <input type="hidden" autocomplete="off" name="ID[]" value="like" class="layui-input inline-block">
+                                <input type="number" autocomplete="off" name="ID[]" class="layui-input">
+                            </div>
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">模拟器名称</label>
                         <div class="layui-input-block">
-                            <input type="text" name="VmName" value="" class="layui-input">
+                            <div class="layui-input-block">
+                                <input type="hidden" autocomplete="off" name="VmName[]" value="like" class="layui-input inline-block">
+                                <input type="text" autocomplete="off" name="VmName[]" class="layui-input">
+                            </div>
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">Imei</label>
                         <div class="layui-input-block">
-                            <input type="text" name="Imei" value="" class="layui-input">
+                            <div class="layui-input-block">
+                                <input type="hidden" autocomplete="off" name="Imei[]" value="like" class="layui-input inline-block">
+                                <input type="text" autocomplete="off" name="Imei[]" class="layui-input">
+                            </div>
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">链接</label>
                         <div class="layui-input-block">
-                            <textarea name="Link" class="layui-textarea"></textarea>
+                            <div class="layui-input-block">
+                                <input type="hidden" autocomplete="off" name="Link[]" value="like" class="layui-input inline-block">
+                                <input type="text" autocomplete="off" name="Link[]" class="layui-input">
+                            </div>
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">描述</label>
                         <div class="layui-input-block">
-                            <textarea name="Desc" class="layui-textarea"></textarea>
+                            <div class="layui-input-block">
+                                <input type="hidden" autocomplete="off" name="Desc[]" value="like" class="layui-input inline-block">
+                                <input type="text" autocomplete="off" name="Desc[]" class="layui-input">
+                            </div>
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">任务进度</label>
                         <div class="layui-input-block">
-                            <input type="text" name="ProId" value="" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">增加数量绑定</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="CreateNum" value="" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">当前好友数量</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="NowFriendNum" value="" class="layui-input">
+                            <div name="ProId" id="ProId" value="" ></div>
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">拓展数据</label>
                         <div class="layui-input-block">
-                            <textarea name="ExData" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">拓展字段2</label>
-                        <div class="layui-input-block">
-                            <textarea name="ExData2" class="layui-textarea"></textarea>
+                            <div class="layui-input-block">
+                                <input type="hidden" autocomplete="off" name="ExData[]" value="like" class="layui-input inline-block">
+                                <input type="text" autocomplete="off" name="ExData[]" class="layui-input">
+                            </div>
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">拓展字段3</label>
                         <div class="layui-input-block">
-                            <textarea name="ExData3" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">绑定帐号</label>
-                        <div class="layui-input-block">
-                            <textarea name="TempStr3" class="layui-textarea"></textarea>
+                            <div class="layui-input-block">
+                                <input type="hidden" autocomplete="off" name="ExData3[]" value="like" class="layui-input inline-block">
+                                <input type="text" autocomplete="off" name="ExData3[]" class="layui-input">
+                            </div>
                         </div>
                     </div>
                     
@@ -108,43 +101,14 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">个人信息</label>
                         <div class="layui-input-block">
-                            <input type="number" name="UserMsgId" value="" class="layui-input">
+                            <div name="UserMsgId" id="UserMsgId" value="" ></div>
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
-                        <label class="layui-form-label">发广告</label>
+                        <label class="layui-form-label"  style="width: 150px; white-space: nowrap;">每日任务列表</label>
                         <div class="layui-input-block">
-                            <input type="number" name="IsSend" value="" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">created_at</label>
-                        <div class="layui-input-block">
-                            <div class="layui-input-block" id="created_at">
-                                <input type="text" autocomplete="off" name="created_at[]" id="created_at-date-start" class="layui-input inline-block" placeholder="开始时间">
-                                -
-                                <input type="text" autocomplete="off" name="created_at[]" id="created_at-date-end" class="layui-input inline-block" placeholder="结束时间">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">updated_at</label>
-                        <div class="layui-input-block">
-                            <div class="layui-input-block" id="updated_at">
-                                <input type="text" autocomplete="off" name="updated_at[]" id="updated_at-date-start" class="layui-input inline-block" placeholder="开始时间">
-                                -
-                                <input type="text" autocomplete="off" name="updated_at[]" id="updated_at-date-end" class="layui-input inline-block" placeholder="结束时间">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">admin_id</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="admin_id" value="" class="layui-input">
+                            <div name="ProTask" id="ProTask" value="" ></div>
                         </div>
                     </div>
                     
@@ -203,38 +167,103 @@
             const INSERT_URL = "/app/admin/userparam/insert";
             const UPDATE_URL = "/app/admin/userparam/update";
             
-            // 字段 服务列表ID ServerIdId
-            layui.use(["jquery", "xmSelect"], function() {
-                let value = layui.$("#ServerIdId").attr("value");
-                let initValue = value ? value.split(",") : [];
-                layui.xmSelect.render({
-                    el: "#ServerIdId",
-                    name: "ServerIdId",
-                    filterable: true,
-                    initValue: initValue,
-                    model: {"icon":"hidden","label":{"type":"text"}},
-                    clickClose: true,
-                    radio: true,
-                })
+            // 字段 任务进度 ProId
+            layui.use(["jquery", "xmSelect", "popup"], function() {
+                layui.$.ajax({
+                    url: "/app/admin/dict/get/userProType",
+                    dataType: "json",
+                    success: function (res) {
+                        let value = layui.$("#ProId").attr("value");
+                        let initValue = value ? value.split(",") : [];
+                        layui.xmSelect.render({
+                            el: "#ProId",
+                            name: "ProId",
+                            initValue: initValue,
+                            filterable: true,
+                            data: res.data, 
+                            model: {"icon":"hidden","label":{"type":"text"}},
+                            clickClose: true,
+                            radio: true,
+                        });
+                        if (res.code) {
+                            layui.popup.failure(res.msg);
+                        }
+                    }
+                });
             });
             
-            // 字段 created_at created_at
-            layui.use(["laydate"], function() {
-                layui.laydate.render({
-                    elem: "#created_at",
-                    range: ["#created_at-date-start", "#created_at-date-end"],
-                    type: "datetime",
+            // 字段 服务列表ID ServerIdId
+            layui.use(["jquery", "xmSelect", "popup"], function() {
+                layui.$.ajax({
+                    url: "/app/admin/base/getServerMap",
+                    dataType: "json",
+                    success: function (res) {
+                        let value = layui.$("#ServerIdId").attr("value");
+                        let initValue = value ? value.split(",") : [];
+                        layui.xmSelect.render({
+                            el: "#ServerIdId",
+                            name: "ServerIdId",
+                            initValue: initValue,
+                            filterable: true,
+                            data: res.data, 
+                            model: {"icon":"hidden","label":{"type":"text"}},
+                            clickClose: true,
+                            radio: true,
+                        });
+                        if (res.code) {
+                            layui.popup.failure(res.msg);
+                        }
+                    }
                 });
-            })
+            });
             
-            // 字段 updated_at updated_at
-            layui.use(["laydate"], function() {
-                layui.laydate.render({
-                    elem: "#updated_at",
-                    range: ["#updated_at-date-start", "#updated_at-date-end"],
-                    type: "datetime",
+            // 字段 个人信息 UserMsgId
+            layui.use(["jquery", "xmSelect", "popup"], function() {
+                layui.$.ajax({
+                    url: "/app/admin/base/getUserMap",
+                    dataType: "json",
+                    success: function (res) {
+                        let value = layui.$("#UserMsgId").attr("value");
+                        let initValue = value ? value.split(",") : [];
+                        layui.xmSelect.render({
+                            el: "#UserMsgId",
+                            name: "UserMsgId",
+                            initValue: initValue,
+                            filterable: true,
+                            data: res.data, 
+                            model: {"icon":"hidden","label":{"type":"text"}},
+                            clickClose: true,
+                            radio: true,
+                        });
+                        if (res.code) {
+                            layui.popup.failure(res.msg);
+                        }
+                    }
                 });
-            })
+            });
+            
+            // 字段 每日任务列表 ProTask
+            layui.use(["jquery", "xmSelect", "popup"], function() {
+                layui.$.ajax({
+                    url: "/app/admin/dict/get/EveryDayDicProTask",
+                    dataType: "json",
+                    success: function (res) {
+                        let value = layui.$("#ProTask").attr("value");
+                        let initValue = value ? value.split(",") : [];
+                        layui.xmSelect.render({
+                            el: "#ProTask",
+                            name: "ProTask",
+                            initValue: initValue,
+                            filterable: true,
+                            data: res.data, 
+                            toolbar: {"show":true,"list":["ALL","CLEAR","REVERSE"]},
+                        });
+                        if (res.code) {
+                            layui.popup.failure(res.msg);
+                        }
+                    }
+                });
+            });
             
             // 表格渲染
             layui.use(["table", "form", "common", "popup", "util"], function() {
@@ -256,39 +285,55 @@
 					},{
 						title: "模拟器名称",align: "center",
 						field: "VmName",
+						sort: true,
 					},{
 						title: "Imei",align: "center",
 						field: "Imei",
+						sort: true,
 					},{
 						title: "链接",align: "center",
 						field: "Link",
+						sort: true,
 					},{
 						title: "描述",align: "center",
 						field: "Desc",
+						sort: true,
 					},{
 						title: "任务进度",align: "center",
 						field: "ProId",
+						sort: true,
+						templet: function (d) {
+							let field = "ProId";
+							if (typeof d[field] == "undefined") return "";
+							let items = [];
+							layui.each((d[field] + "").split(","), function (k , v) {
+								items.push(apiResults[field][v] || v);
+							});
+							return util.escape(items.join(","));
+						}
 					},{
 						title: "增加数量绑定",align: "center",
 						field: "CreateNum",
-					},{
-						title: "当前好友数量",align: "center",
-						field: "NowFriendNum",
+						hide: true,
 					},{
 						title: "拓展数据",align: "center",
 						field: "ExData",
-					},{
-						title: "拓展字段2",align: "center",
-						field: "ExData2",
+						hide: true,
+						sort: true,
 					},{
 						title: "拓展字段3",align: "center",
 						field: "ExData3",
+						hide: true,
+						sort: true,
 					},{
 						title: "绑定帐号",align: "center",
 						field: "TempStr3",
+						hide: true,
+						sort: true,
 					},{
 						title: "服务列表ID",align: "center",
 						field: "ServerIdId",
+						sort: true,
 						templet: function (d) {
 							let field = "ServerIdId";
 							if (typeof d[field] == "undefined") return "";
@@ -301,18 +346,41 @@
 					},{
 						title: "个人信息",align: "center",
 						field: "UserMsgId",
+						sort: true,
+						templet: function (d) {
+							let field = "UserMsgId";
+							if (typeof d[field] == "undefined") return "";
+							let items = [];
+							layui.each((d[field] + "").split(","), function (k , v) {
+								items.push(apiResults[field][v] || v);
+							});
+							return util.escape(items.join(","));
+						}
 					},{
-						title: "发广告",align: "center",
-						field: "IsSend",
-					},{
-						title: "created_at",align: "center",
+						title: "创建时间",align: "center",
 						field: "created_at",
+						sort: true,
 					},{
-						title: "updated_at",align: "center",
+						title: "更新时间",align: "center",
 						field: "updated_at",
+						hide: true,
 					},{
-						title: "admin_id",align: "center",
+						title: "用户id",align: "center",
 						field: "admin_id",
+						hide: true,
+					},{
+						title: "每日任务列表",align: "center",
+						field: "ProTask",
+						sort: true,
+						templet: function (d) {
+							let field = "ProTask";
+							if (typeof d[field] == "undefined") return "";
+							let items = [];
+							layui.each((d[field] + "").split(","), function (k , v) {
+								items.push(apiResults[field][v] || v);
+							});
+							return util.escape(items.join(","));
+						}
 					},{
 						title: "操作",
 						toolbar: "#table-bar",
@@ -323,28 +391,71 @@
 				];
 				
 				// 渲染表格
-				table.render({
-				    elem: "#data-table",
-				    url: SELECT_API,
-				    page: true,
-				    cols: [cols],
-				    skin: "line",
-				    size: "lg",
-				    toolbar: "#table-toolbar",
-				    autoSort: false,
-				    defaultToolbar: [{
-				        title: "刷新",
-				        layEvent: "refresh",
-				        icon: "layui-icon-refresh",
-				    }, "filter", "print", "exports"],
-				    done: function () {
-				        layer.photos({photos: 'div[lay-id="data-table"]', anim: 5});
-				    }
-				});
+				function render()
+				{
+				    table.render({
+				        elem: "#data-table",
+				        url: SELECT_API,
+				        page: true,
+				        cols: [cols],
+				        skin: "line",
+				        size: "lg",
+				        toolbar: "#table-toolbar",
+				        autoSort: false,
+				        defaultToolbar: [{
+				            title: "刷新",
+				            layEvent: "refresh",
+				            icon: "layui-icon-refresh",
+				        }, "filter", "print", "exports"],
+				        done: function () {
+				            layer.photos({photos: 'div[lay-id="data-table"]', anim: 5});
+				        }
+				    });
+				}
 				
 				// 获取表格中下拉或树形组件数据
+				let apis = [];
+				apis.push(["ProId", "/app/admin/dict/get/userProType"]);
+				apis.push(["ServerIdId", "/app/admin/base/getServerMap"]);
+				apis.push(["UserMsgId", "/app/admin/base/getUserMap"]);
+				apis.push(["ProTask", "/app/admin/dict/get/EveryDayDicProTask"]);
 				let apiResults = {};
+				apiResults["ProId"] = [];
 				apiResults["ServerIdId"] = [];
+				apiResults["UserMsgId"] = [];
+				apiResults["ProTask"] = [];
+				let count = apis.length;
+				layui.each(apis, function (k, item) {
+				    let [field, url] = item;
+				    $.ajax({
+				        url: url,
+				        dateType: "json",
+				        success: function (res) {
+				            if (res.code) {
+				                return layui.popup.failure(res.msg);
+				            }
+				            function travel(items) {
+				                for (let k in items) {
+				                    let item = items[k];
+				                    apiResults[field][item.value] = item.name;
+				                    if (item.children) {
+				                        travel(item.children);
+				                    }
+				                }
+				            }
+				            travel(res.data);
+				        },
+				        complete: function () {
+				            if (--count === 0) {
+				                render();
+				            }
+				        }
+				    });
+				});
+				if (!count) {
+				    render();
+				}
+				
                 // 编辑或删除行事件
                 table.on("tool(data-table)", function(obj) {
                     if (obj.event === "remove") {

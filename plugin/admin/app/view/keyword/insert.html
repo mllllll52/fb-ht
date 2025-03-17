@@ -17,33 +17,12 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">关键字内容</label>
                         <div class="layui-input-block">
-                            <textarea name="Msg" class="layui-textarea"></textarea>
+                            <input type="text" name="Msg" value="" class="layui-input">
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
-                        <label class="layui-form-label">备用字段</label>
-                        <div class="layui-input-block">
-                            <textarea name="ExData" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">created_at</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="created_at" id="created_at" value="CURRENT_TIMESTAMP" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">updated_at</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="updated_at" id="updated_at" value="CURRENT_TIMESTAMP" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">admin_id</label>
+                        <label class="layui-form-label">用户id</label>
                         <div class="layui-input-block">
                             <input type="number" name="admin_id" value="" class="layui-input">
                         </div>
@@ -75,22 +54,6 @@
 
             // 相关接口
             const INSERT_API = "/app/admin/keyword/insert";
-            
-            // 字段 created_at created_at
-            layui.use(["laydate"], function() {
-                layui.laydate.render({
-                    elem: "#created_at",
-                    type: "datetime",
-                });
-            })
-            
-            // 字段 updated_at updated_at
-            layui.use(["laydate"], function() {
-                layui.laydate.render({
-                    elem: "#updated_at",
-                    type: "datetime",
-                });
-            })
             
             //提交事件
             layui.use(["form", "popup"], function () {

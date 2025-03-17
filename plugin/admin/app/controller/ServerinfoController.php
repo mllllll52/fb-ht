@@ -7,7 +7,6 @@ use support\Response;
 use plugin\admin\app\model\Serverinfo;
 use plugin\admin\app\controller\Crud;
 use support\exception\BusinessException;
-
 /**
  * 服务器 
  */
@@ -18,6 +17,9 @@ class ServerinfoController extends Crud
      * @var Serverinfo
      */
     protected $model = null;
+    protected $dataLimit = "personal";
+
+    protected $dataLimitField = "admin_id";
 
     /**
      * 构造函数
@@ -64,23 +66,5 @@ class ServerinfoController extends Crud
         }
         return view('serverinfo/update');
     }
-
-    /**
-     * 批量修改
-     * @param Request $request
-     * @return Response
-     * @throws BusinessException
-     */
-    public function batchUpdate(Request $request): Response
-    {
-        if ($request->method() === 'POST') {
-            return parent::batchUpdate($request);
-        }
-        return view('serverinfo/batchUpdate');
-    }
-
-
-
-
 
 }

@@ -7,10 +7,9 @@ use plugin\admin\app\model\Base;
 /**
  * @property integer $ID (主键)
  * @property mixed $Msg 关键字内容
- * @property mixed $ExData 备用字段
- * @property mixed $created_at 
- * @property mixed $updated_at 
- * @property integer $admin_id
+ * @property string $created_at 创建时间
+ * @property string $updated_at 更新时间
+ * @property integer $admin_id 用户id
  */
 class Keyword extends Base
 {

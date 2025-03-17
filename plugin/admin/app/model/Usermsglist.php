@@ -6,16 +6,11 @@ use plugin\admin\app\model\Base;
 
 /**
  * @property integer $ID (主键)
- * @property integer $Sex 姓别
- * @property integer $Age 年龄
- * @property integer $CityId 国家
- * @property mixed $Desc 用户信息模板描述
- * @property mixed $GroupNameId 广告组
- * @property mixed $VideoReplyId 视频回复
- * @property mixed $PostsReplyId 帖子回复
+ * @property string $Desc 用户信息模板描述
+ * @property integer $GroupNameId 广告组
  * @property integer $KeyWorldId 关键字
- * @property mixed $created_at 
- * @property mixed $updated_at 
+ * @property string $created_at 创建时间
+ * @property string $updated_at 更新时间
  * @property integer $admin_id
  */
 class Usermsglist extends Base

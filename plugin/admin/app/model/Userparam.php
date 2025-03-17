@@ -10,19 +10,17 @@ use plugin\admin\app\model\Base;
  * @property string $Imei Imei
  * @property mixed $Link 链接
  * @property mixed $Desc 描述
- * @property mixed $ProId 任务进度
+ * @property integer $ProId 任务进度
  * @property integer $CreateNum 增加数量绑定
- * @property integer $NowFriendNum 当前好友数量
  * @property mixed $ExData 拓展数据
- * @property mixed $ExData2 拓展字段2
  * @property mixed $ExData3 拓展字段3
  * @property mixed $TempStr3 绑定帐号
  * @property integer $ServerIdId 服务列表ID
  * @property integer $UserMsgId 个人信息
- * @property integer $IsSend 发广告
- * @property mixed $created_at 
- * @property mixed $updated_at 
- * @property integer $admin_id
+ * @property string $created_at 创建时间
+ * @property string $updated_at 更新时间
+ * @property integer $admin_id 用户id
+ * @property string $ProTask 每日任务列表
  */
 class Userparam extends Base
 {

@@ -18,42 +18,21 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label required">广告内容</label>
                         <div class="layui-input-block">
-                            <textarea name="Msg" required lay-verify="required" class="layui-textarea"></textarea>
+                            <input type="text" name="Msg" value="" required lay-verify="required" class="layui-input">
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">提供的备注字段</label>
                         <div class="layui-input-block">
-                            <textarea name="Desc" class="layui-textarea"></textarea>
+                            <input type="text" name="Desc" value="" class="layui-input">
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label required">广告组</label>
                         <div class="layui-input-block">
-                            <textarea name="GroupNameId" required lay-verify="required" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">created_at</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="created_at" id="created_at" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">updated_at</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="updated_at" id="updated_at" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">admin_id</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="admin_id" value="" class="layui-input">
+                            <div name="GroupNameId" id="GroupNameId" required value="" ></div>
                         </div>
                     </div>
                     
@@ -109,21 +88,31 @@
                             }
                         });
                         
-                        // 字段 created_at created_at
-                        layui.use(["laydate"], function() {
-                            layui.laydate.render({
-                                elem: "#created_at",
-                                type: "datetime",
+                        // 字段 广告组 GroupNameId
+                        layui.use(["jquery", "xmSelect", "popup"], function() {
+                            layui.$.ajax({
+                                url: "/app/admin/base/getAvertGourpMap",
+                                dataType: "json",
+                                success: function (res) {
+                                    let value = layui.$("#GroupNameId").attr("value");
+                                    let initValue = value ? value.split(",") : [];
+                                    layui.xmSelect.render({
+                                        el: "#GroupNameId",
+                                        name: "GroupNameId",
+                                        initValue: initValue,
+                                        filterable: true,
+                                        data: res.data, 
+                                        model: {"icon":"hidden","label":{"type":"text"}},
+                                        clickClose: true,
+                                        radio: true,
+                                        layVerify: "required",
+                                    });
+                                    if (res.code) {
+                                        layui.popup.failure(res.msg);
+                                    }
+                                }
                             });
-                        })
-                        
-                        // 字段 updated_at updated_at
-                        layui.use(["laydate"], function() {
-                            layui.laydate.render({
-                                elem: "#updated_at",
-                                type: "datetime",
-                            });
-                        })
+                        });
                         
                         
                         // ajax返回失败

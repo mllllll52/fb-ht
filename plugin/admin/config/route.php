@@ -15,12 +15,21 @@
 use plugin\admin\app\controller\AccountController;
 
 use plugin\admin\app\controller\DictController;
+use plugin\admin\app\controller\BaseController;
+
 use Webman\Route;
 use support\Request;
 
+Route::any('/app/admin/base/getServerIdDesc', [BaseController::class, 'getServerIdDesc']);
 
 
+Route::any('/app/admin/base/getUserMap', [BaseController::class, 'getUserMap']);
 
+Route::any('/app/admin/base/getServerMap', [BaseController::class, 'getServerMap']);
+
+Route::any('/app/admin/base/getAvertGourpMap', [BaseController::class, 'getAvertGourpMap']);
+
+Route::any('/app/admin/base/getKeyMap', [BaseController::class, 'getKeyMap']);
 
 Route::any('/app/admin/account/loginPost', [AccountController::class, 'loginPost']);
 

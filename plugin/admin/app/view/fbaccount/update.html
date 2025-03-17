@@ -18,70 +18,14 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">fb帐号数据</label>
                         <div class="layui-input-block">
-                            <textarea name="FbData" class="layui-textarea"></textarea>
+                            <input type="text" name="FbData" value="" class="layui-input">
                         </div>
                     </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label">代理帐号数据</label>
                         <div class="layui-input-block">
-                            <textarea name="ProxyData" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">异常状态</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="StatusStrId" value="" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Data</label>
-                        <div class="layui-input-block">
-                            <textarea name="Data" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Data2</label>
-                        <div class="layui-input-block">
-                            <textarea name="Data2" class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">帐号使用状态</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="Int1" value="" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">帐号信息</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="AccountMsgId" value="" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">created_at</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="created_at" id="created_at" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">updated_at</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="updated_at" id="updated_at" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">admin_id</label>
-                        <div class="layui-input-block">
-                            <input type="number" name="admin_id" value="" class="layui-input">
+                            <input type="text" name="ProxyData" value="" class="layui-input">
                         </div>
                     </div>
                     
@@ -136,22 +80,6 @@
                                 obj[0].value = value;
                             }
                         });
-                        
-                        // 字段 created_at created_at
-                        layui.use(["laydate"], function() {
-                            layui.laydate.render({
-                                elem: "#created_at",
-                                type: "datetime",
-                            });
-                        })
-                        
-                        // 字段 updated_at updated_at
-                        layui.use(["laydate"], function() {
-                            layui.laydate.render({
-                                elem: "#updated_at",
-                                type: "datetime",
-                            });
-                        })
                         
                         
                         // ajax返回失败
