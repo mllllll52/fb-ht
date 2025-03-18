@@ -54,8 +54,6 @@ class UserparamController extends Crud
         $data = $this->insertInput($request);
         $ids = $data["ServerIdId"];
 
-//        $nextId = Util::db()->table('userparams')->max('id') + 1;
-
         $result = Util::db()->select("SHOW TABLE STATUS LIKE 'userparams'");
         $nextId = $result[0]->Auto_increment ?? null;
 
