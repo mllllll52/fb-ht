@@ -15,6 +15,24 @@ use plugin\admin\app\common\Util;
 class BaseController extends Crud
 {
 
+    public $noNeedAuth = ['getTaskListApi'];
+
+
+    // 获取广告组列表
+    public function getTaskListApi(Request $request): Response
+    {
+        $localIp = $request->post("LocalIp");
+        $admin_id = admin_id();
+        $keys = Util::db()->table('vmTask')->where('admin_id', $admin_id)->get()->toArray();
+        $server = Util::db()->table('serverInfo')->where('admin_id', $admin_id)->where('LocalIp', $localIp)->get()->toArray();
+        $data = [];
+        foreach ($server as $item) {
+            $item = (array) $item;
+            $data["maxNum"] = $item["RunMaxLimit"];
+        }
+        $data["taskList"] = $keys;
+        return $this->json(200, "ok", $data);
+    }
 
 
 
@@ -24,7 +42,7 @@ class BaseController extends Crud
     {
         $ids = 63;
         $admin_id = admin_id();
-        $keys = Util::db()->table('serverinfo')->where('admin_id', $admin_id)->where('id', $ids)->get()->toArray();
+        $keys = Util::db()->table('serverInfo')->where('admin_id', $admin_id)->where('id', $ids)->get()->toArray();
 
         foreach ($keys as $item) {
             $item = (array) $item;
@@ -44,7 +62,7 @@ class BaseController extends Crud
     {
 
         $admin_id = admin_id();
-        $keys = Util::db()->table('usermsglist')->where('admin_id', $admin_id)->get()->toArray();
+        $keys = Util::db()->table('userMsgList')->where('admin_id', $admin_id)->get()->toArray();
 
         foreach ($keys as $item) {
             $item = (array) $item;
@@ -63,7 +81,7 @@ class BaseController extends Crud
     {
 
         $admin_id = admin_id();
-        $keys = Util::db()->table('serverinfo')->where('admin_id', $admin_id)->get()->toArray();
+        $keys = Util::db()->table('serverInfo')->where('admin_id', $admin_id)->get()->toArray();
 
         foreach ($keys as $item) {
             $item = (array) $item;
@@ -81,7 +99,7 @@ class BaseController extends Crud
     {
 
         $admin_id = admin_id();
-        $keys = Util::db()->table('avertgourp')->where('admin_id', $admin_id)->get()->toArray();
+        $keys = Util::db()->table('avertGourp')->where('admin_id', $admin_id)->get()->toArray();
 
         foreach ($keys as $item) {
             $item = (array) $item;
@@ -101,7 +119,7 @@ class BaseController extends Crud
     {
 
         $admin_id = admin_id();
-        $keys = Util::db()->table('keywords')->where('admin_id', $admin_id)->get()->toArray();
+        $keys = Util::db()->table('keyWords')->where('admin_id', $admin_id)->get()->toArray();
 
         foreach ($keys as $item) {
             $item = (array) $item;

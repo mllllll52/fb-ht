@@ -20,8 +20,9 @@ use plugin\admin\app\controller\BaseController;
 use Webman\Route;
 use support\Request;
 
-Route::any('/app/admin/base/getServerIdDesc', [BaseController::class, 'getServerIdDesc']);
+Route::any('/app/admin/base/getTaskListApi', [BaseController::class, 'getTaskListApi']);
 
+Route::any('/app/admin/base/getServerIdDesc', [BaseController::class, 'getServerIdDesc']);
 
 Route::any('/app/admin/base/getUserMap', [BaseController::class, 'getUserMap']);
 

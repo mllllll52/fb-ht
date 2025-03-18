@@ -54,7 +54,11 @@ class UserparamController extends Crud
         $data = $this->insertInput($request);
         $ids = $data["ServerIdId"];
 
-        $nextId = Util::db()->table('userparams')->max('id') + 1;
+//        $nextId = Util::db()->table('userparams')->max('id') + 1;
+
+        $result = Util::db()->select("SHOW TABLE STATUS LIKE 'userparams'");
+        $nextId = $result[0]->Auto_increment ?? null;
+
         $keys = Util::db()->table('serverinfo')->where('admin_id', $admin_id)->where('id', $ids)->get()->toArray();
         $vmData = [];
         foreach ($keys as $key) {
@@ -63,7 +67,7 @@ class UserparamController extends Crud
             $VmWorkList = [
                 [
                     "ip" =>  $key->LocalIp,
-                    "VmName" =>  $key->LocalIp,
+                    "VmName" =>  $key->Desc."-".$nextId,
                     "ID" =>  $nextId,
                     "ServerName" =>  $key->Desc
                 ]
