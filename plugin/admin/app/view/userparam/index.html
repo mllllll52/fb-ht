@@ -35,16 +35,6 @@
                     </div>
                     
                     <div class="layui-form-item">
-                        <label class="layui-form-label">Imei</label>
-                        <div class="layui-input-block">
-                            <div class="layui-input-block">
-                                <input type="hidden" autocomplete="off" name="Imei[]" value="like" class="layui-input inline-block">
-                                <input type="text" autocomplete="off" name="Imei[]" class="layui-input">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="layui-form-item">
                         <label class="layui-form-label">链接</label>
                         <div class="layui-input-block">
                             <div class="layui-input-block">
@@ -287,17 +277,14 @@
 						field: "VmName",
 						sort: true,
 					},{
-						title: "Imei",align: "center",
-						field: "Imei",
-						sort: true,
-					},{
 						title: "链接",align: "center",
 						field: "Link",
 						sort: true,
 					},{
 						title: "描述",align: "center",
 						field: "Desc",
-						sort: true,
+                        hide: true,
+                        sort: true,
 					},{
 						title: "任务进度",align: "center",
 						field: "ProId",
@@ -312,6 +299,19 @@
 							return util.escape(items.join(","));
 						}
 					},{
+                        title: "每日任务列表",align: "center",
+                        field: "ProTask",
+                        sort: true,
+                        templet: function (d) {
+                            let field = "ProTask";
+                            if (typeof d[field] == "undefined") return "";
+                            let items = [];
+                            layui.each((d[field] + "").split(","), function (k , v) {
+                                items.push(apiResults[field][v] || v);
+                            });
+                            return util.escape(items.join(","));
+                        }
+                    },{
 						title: "增加数量绑定",align: "center",
 						field: "CreateNum",
 						hide: true,
@@ -368,19 +368,6 @@
 						title: "用户id",align: "center",
 						field: "admin_id",
 						hide: true,
-					},{
-						title: "每日任务列表",align: "center",
-						field: "ProTask",
-						sort: true,
-						templet: function (d) {
-							let field = "ProTask";
-							if (typeof d[field] == "undefined") return "";
-							let items = [];
-							layui.each((d[field] + "").split(","), function (k , v) {
-								items.push(apiResults[field][v] || v);
-							});
-							return util.escape(items.join(","));
-						}
 					},{
 						title: "操作",
 						toolbar: "#table-bar",

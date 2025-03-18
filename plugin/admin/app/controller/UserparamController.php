@@ -54,7 +54,6 @@ class UserparamController extends Crud
         $data = $this->insertInput($request);
         $ids = $data["ServerIdId"];
 
-        $data["Imei"] = str_pad(rand(0, 999999999999999), 15, '0', STR_PAD_LEFT);
         $nextId = Util::db()->table('userparams')->max('id') + 1;
         $keys = Util::db()->table('serverinfo')->where('admin_id', $admin_id)->where('id', $ids)->get()->toArray();
         $vmData = [];
@@ -65,7 +64,6 @@ class UserparamController extends Crud
                 [
                     "ip" =>  $key->LocalIp,
                     "VmName" =>  $key->LocalIp,
-                    "Imei" =>  $data["Imei"],
                     "ID" =>  $nextId,
                     "ServerName" =>  $key->Desc
                 ]
