@@ -19,6 +19,16 @@ use plugin\admin\app\controller\BaseController;
 
 use Webman\Route;
 use support\Request;
+Route::any('/app/admin/base/SearchAvertGourp', [BaseController::class, 'SearchAvertGourp']);
+
+
+Route::any('/app/admin/base/useEdit', [BaseController::class, 'useEdit']);
+
+Route::any('/app/admin/base/GetUserMsg', [BaseController::class, 'GetUserMsg']);
+
+Route::any('/app/admin/base/test', [BaseController::class, 'test']);
+
+Route::any('/app/admin/base/delTaskList', [BaseController::class, 'delTaskList']);
 
 Route::any('/app/admin/base/getTaskListApi', [BaseController::class, 'getTaskListApi']);
 

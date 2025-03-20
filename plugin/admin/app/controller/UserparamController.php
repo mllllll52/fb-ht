@@ -8,6 +8,7 @@ use plugin\admin\app\model\Userparam;
 use plugin\admin\app\controller\Crud;
 use support\exception\BusinessException;
 use plugin\admin\app\common\Util;
+use plugin\admin\app\controller\BaseController;
 
 /**
  * 任务 
@@ -51,44 +52,20 @@ class UserparamController extends Crud
     public function taskInsert(Request $request): Response
     {
         $admin_id = admin_id();
+//        判断是权限
         $data = $this->insertInput($request);
+//        获取当前的服务列表数据
         $ids = $data["ServerIdId"];
-
-        $result = Util::db()->select("SHOW TABLE STATUS LIKE 'userparams'");
-        $nextId = $result[0]->Auto_increment ?? null;
-
-        $keys = Util::db()->table('serverinfo')->where('admin_id', $admin_id)->where('id', $ids)->get()->toArray();
-        $vmData = [];
-        foreach ($keys as $key) {
-            $data["VmName"] = $key->Desc . "-" . $nextId;
-//            新创建的任务数据  默认生成一条新的创建模拟器数据
-            $VmWorkList = [
-                [
-                    "ip" =>  $key->LocalIp,
-                    "VmName" =>  $key->Desc."-".$nextId,
-                    "ID" =>  $nextId,
-                    "ServerName" =>  $key->Desc
-                ]
-            ];
-
-            $vmData["VTypeId"] = 1;
-            $vmData["VmWorkList"] = json_encode($VmWorkList);
-            $vmData["LocalIp"] = $key->LocalIp;
-            $currentTime = date('Y-m-d H:i:s');
-
-            $vmData["created_at"] = $currentTime;
-            $vmData["updated_at"] = $currentTime;
-            $vmData["admin_id"] = $admin_id;
-        }
-
-
-        // test 增加定时器
-
-        $this->vmtaskInsert($vmData);
-        $data["TempStr3"] = $this->bindAccountData($vmData);
-
         $data["CreateNum"] = 1;
+
+//        获取可绑定的账号id
+        $data["TempStr3"] = $this->bindAccountData();
         $id = $this->doInsert($data);
+        $myObj = new BaseController;  // 实例化对象
+
+
+        $upList = $myObj->addVmData($admin_id, $ids, $id, 1);
+        $this->doUpdate($id, $upList);
         return $this->json(0, 'ok', ['id' => $id]);
     }
 
@@ -96,21 +73,11 @@ class UserparamController extends Crud
     /**
      * 绑定账号数据
      */
-    private function bindAccountData($data):string
+    private function bindAccountData():string
     {
         $keys = Util::db()->table('fbAccount')->where('admin_id', admin_id())->where('Int1', '!=', 2)->get()->toArray();
         Util::db()->table('fbAccount')->where('id', $keys[0]->ID)->update(['Int1' => '2']);
         return $keys[0]->ID;
-    }
-
-
-    /**
-     * 插入模拟器任务列表
-     * @return Response
-     */
-    private function vmtaskInsert($data):void
-    {
-         Util::db()->table('vmTask')->insert($data);
     }
 
 
