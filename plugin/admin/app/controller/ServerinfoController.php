@@ -90,14 +90,14 @@ class ServerinfoController extends Crud
             }
 
             $timestamp = time();
+            $data["ExpiredTime"] = $key-> CountExpiredTime;
             if (!$key-> CountExpiredTime){
                 $newTime = $plan[$key->ExType] * 3600;
                 $data["ExpiredTime"] = date('Y-m-d H:i:s', $timestamp + $newTime);
             }
 
-            $CountExpiredTime = $key-> CountExpiredTime;
             $cdkData = [
-                "CountExpiredTime" => $CountExpiredTime ?? $data["ExpiredTime"],
+                "CountExpiredTime" => $data["ExpiredTime"],
                 "UseTime" => date('Y-m-d H:i:s', $timestamp ),
                 "IsUse" => 1,
                 "BanMac" => $LocalIp,

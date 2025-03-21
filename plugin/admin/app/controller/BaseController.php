@@ -140,6 +140,15 @@ class BaseController extends Crud
         $admin_id = admin_id();
         $keys = Util::db()->table('vmTask')->where('admin_id', $admin_id)->get()->toArray();
         $server = Util::db()->table('serverInfo')->where('admin_id', $admin_id)->where('LocalIp', $localIp)->get()->toArray();
+        $expiredTime = $server[0]->ExpiredTime;
+        // 先转换成时间戳
+        $expiredTimestamp = strtotime($expiredTime);
+        $currentTimestamp = time();
+        // 进行对比
+        if ($currentTimestamp > $expiredTimestamp) {
+            return $this->json(410, "ckd expired", []);
+        }
+
         $data = [];
         foreach ($server as $item) {
             $item = (array) $item;
