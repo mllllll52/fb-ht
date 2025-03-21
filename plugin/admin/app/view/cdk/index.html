@@ -255,6 +255,10 @@
 					},{
 						title: "是否已出售",align: "center",
 						field: "IsSellCode",
+                        templet: function(d){
+                            return d.IsUse == 1 ? "是" : "否";
+                        }
+
 					},{
 						title: "创建时间",align: "center",
 						field: "created_at",
