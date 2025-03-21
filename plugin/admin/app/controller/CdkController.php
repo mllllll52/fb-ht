@@ -19,11 +19,6 @@ class CdkController extends Crud
      */
     protected $model = null;
 
-    protected $dataLimit = "personal";
-
-    protected $dataLimitField = "admin_id";
-
-
 
     //修改上报参数
     public function cdkInsert(Request $request): Response
